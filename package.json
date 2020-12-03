@@ -1,0 +1,39 @@
+{
+  "name": "database-8",
+  "version": "1.0.0",
+  "description": "Lab 8 for database course",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "node -v",
+    "build": "echo 'kinda build'",
+    "server": "nodemon ./src/app.js",
+    "dev": "concurrently \"nodemon ./src/app.js\" \"cd ./frontend && npm run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KucherenkoIvan/Database-8.git"
+  },
+  "keywords": [
+    "death",
+    "suffer",
+    "sorrow",
+    "letmedie",
+    "suicide"
+  ],
+  "author": "Kucherenko Ivan <stysha.72@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KucherenkoIvan/Database-8/issues"
+  },
+  "homepage": "https://github.com/KucherenkoIvan/Database-8#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
