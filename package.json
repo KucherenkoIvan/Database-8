@@ -4,6 +4,8 @@
   "description": "Lab 8 for database course",
   "main": "./src/app.js",
   "scripts": {
+    "install": "npm install && cd ./frontend && npm install",
+    "start": "cd ./frontend && npm run start",
     "test": "node -v",
     "build": "echo 'kinda build'",
     "server": "nodemon ./src/app.js",
