@@ -1,10 +1,12 @@
 import React from "react"
-
+import './index.scss'
 
 const Header = () =>{
 
     return (
-        <header style={ { border: "1px solid black" } }>Это пиздец</header>
+        <header className="header">
+
+        </header>
     );
 }
 
