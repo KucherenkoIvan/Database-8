@@ -1,0 +1,12 @@
+@import "../../vars.scss";
+
+.aside{
+    border: 1px solid rgba(#101010,.3);
+    color: $primary-white;
+    background-color: $header-black;
+    padding: 20px;
+    padding-bottom: 1000px;
+    height: 100%;
+    width: 25%;
+    //box-shadow: 2px 2px 10px rgba(0,0,0, .24);
+}
