@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: gray;
+    background-color: $header-black;
     border: 1px solid black;
     width: 100%;
     height: 40px;
@@ -13,6 +13,7 @@
 .select{
     width: 10%;
     padding-left: 5px;
+    outline: none;
 }
 .logo{
     height: 80%;
@@ -24,12 +25,9 @@
     margin-right: 20px;
 }
 
-.nav__button{
-    padding: 2px;
-    margin: 5px;
-}
 .nav__select{
     padding: 2px;
     margin: 5px;
 }
+
 
