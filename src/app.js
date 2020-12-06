@@ -1,14 +1,11 @@
 const express = require('express');
 const config = require('config');
 const sequelize = require('./sequelize');
+const { log, error, success } = require('./log');
 
 const APP_PORT = config.get('app-port') || 5000; 
 
 const app = express();
-
-app.listen(APP_PORT, () => {
-    console.log(`App has been started on port ${APP_PORT}`);
-});
 
 app.get('/', (req, res) => {
     res.redirect('/api/test');
@@ -24,14 +21,20 @@ app.use(require('./server-routes/placeholder.route.js'));
 
 (async () => {
   try {
-    console.log('connecting to the database...');
+    log('Connecting to the database');
     await sequelize.sync();
-    console.log('database connected');
+    success('Connection established');
   } catch (e) {
-    console.log('connection failed');
-    console.error(e);
+    error('Connection failed');
     process.exit(-1);
   }
-})();
+})().then( () => {
+  app.listen(APP_PORT, () => {
+    log(`Server running on port ${APP_PORT}`);
+  });
+});
+
+
+
 
 
