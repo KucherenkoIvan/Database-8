@@ -29,11 +29,14 @@
   },
   "homepage": "https://github.com/KucherenkoIvan/Database-8#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.0",
     "bcrypt": "^5.0.0",
     "config": "^3.3.3",
     "eslint": "^7.14.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
     "sequelize": "^6.3.5",
     "tedious": "^9.2.1"
   },
