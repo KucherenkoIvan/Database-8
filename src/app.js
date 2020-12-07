@@ -7,6 +7,8 @@ const APP_PORT = config.get('app-port') || 5000;
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.redirect('/api/test');
 });
@@ -17,6 +19,9 @@ app.get('/api/test', (req, res) => {
 });
 
 app.use(require('./server-routes/sql.route.js'));
+app.use('/api/auth/', require('./server-routes/auth.route.js'));
+app.use('/api/model/', require('./server-routes/model.route.js'));
+
 app.use(require('./server-routes/placeholder.route.js'));
 
 (async () => {
