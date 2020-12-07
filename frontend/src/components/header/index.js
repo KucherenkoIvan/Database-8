@@ -1,19 +1,21 @@
-import React from "react"
-import './index.scss'
+import React from "react";
+import {setOption} from '../../redux/actionCreators';
+import {connect} from 'react-redux';
+import './index.scss';
 
-const Header = () =>{
+const Header = ({ setOption }) =>{
 
     return (
         <header className="header">
-            <img className="logo" src="https://cdn.discordapp.com/attachments/612623022884388864/785109194268999700/i4601546127686-removebg-preview.png"></img>
-            <select className="select" defaultValue="About">
+            <img alt="R" className="logo" src="https://cdn.discordapp.com/attachments/612623022884388864/785109194268999700/i4601546127686-removebg-preview.png"></img>
+            <select className="select" defaultValue="About" onChange={(event) => setOption(event.target.value)}>
                 <option value="About">О нас</option>
-                <option value="Customers">Customers</option>
+                <option value="Customer">Customers</option>
                 <option value="Courier">Courier</option>
                 <option value="CourierInfo">CourierInfo</option>
-                <option value="Products">Products</option>
+                <option value="Product">Products</option>
                 <option value="Stocks">Stocks</option>
-                <option value="Orders">Orders</option>
+                <option value="Order">Orders</option>
                 <option value="OrderDetails">OrderDetails</option>
             </select>
             <div className="header__right">
@@ -24,4 +26,8 @@ const Header = () =>{
     );
 }
 
-export default Header;
+const mapDispatchToProps = {
+    setOption
+}
+
+export default connect(null, mapDispatchToProps)(Header);

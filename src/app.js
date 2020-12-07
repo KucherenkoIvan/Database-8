@@ -30,7 +30,7 @@ app.use(require('./server-routes/placeholder.route.js'));
   }
 })().then( () => {
   app.listen(APP_PORT, () => {
-    log(`Server running on port ${APP_PORT}`);
+    success(`Server running on port ${APP_PORT}`);
   });
 });
 
