@@ -8,8 +8,8 @@ const CourierInfo = () =>{
         id: 0,
         CourierID: 0,
         BirthDate: new Date(),
-        Address: "",
-        Phone: ""
+        Address: '',
+        Phone: ''
         
     });
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
@@ -18,7 +18,7 @@ const CourierInfo = () =>{
             <label className="formName">CourierInfo</label>
             <div className="block">
                 <label className="label">ID</label>
-                <input onChange={changeHandler} className="input" name="id" />
+                <input disabled className="input" name="id" />
             </div>
             <div className="block">
                 <label className="label">CourierID</label>

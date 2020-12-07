@@ -8,7 +8,7 @@ const Header = ({ setOption }) =>{
     return (
         <header className="header">
             <img alt="R" className="logo" src="https://cdn.discordapp.com/attachments/612623022884388864/785109194268999700/i4601546127686-removebg-preview.png"></img>
-            <select className="select" defaultValue="About" onChange={(event) => setOption(event.target.value)}>
+            <select className="input input_w10" defaultValue="About" onChange={(event) => setOption(event.target.value)}>
                 <option value="About">О нас</option>
                 <option value="Customer">Customers</option>
                 <option value="Courier">Courier</option>
