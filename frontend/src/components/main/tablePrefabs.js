@@ -1,5 +1,6 @@
 export const tablePrefabs = {
     Customer: {
+        name: 'Customer',
         fields: [
             'id',
             'FName',
@@ -12,6 +13,7 @@ export const tablePrefabs = {
         ],
     },
     Courier: {
+        name: 'Courier',
         fields: [
             'id',
             'FMame',
@@ -22,6 +24,7 @@ export const tablePrefabs = {
         ],
     },
     CourierInfo: {
+        name: 'CourierInfo',
         fields: [
             'id',
             'CourierID',
@@ -31,6 +34,7 @@ export const tablePrefabs = {
         ],
     },
     Product: {
+        name: 'Product',
         fields: [
             'id',
             'Name',
@@ -38,6 +42,7 @@ export const tablePrefabs = {
         ],
     },
     Stocks: {
+        name: 'Stocks',
         fields: [
             'id',
             'ProductID',
@@ -45,6 +50,7 @@ export const tablePrefabs = {
         ],
     },
     Order: {
+        name: 'Order',
         fields: [
             'id',
             'CustomerID',
@@ -53,6 +59,7 @@ export const tablePrefabs = {
         ],
     },
     OrderDetails: {
+        name: 'OrderDetails',
         fields: [
             'id',
             'OrderID',
@@ -61,6 +68,15 @@ export const tablePrefabs = {
             'Qty',
             'Price',
             'TotalPrice',
+        ],
+    },    
+    User: {
+        name: 'User',
+        fields: [
+            'id',
+            'login',
+            'password',
+            'accessLevel'
         ],
     },
 };
