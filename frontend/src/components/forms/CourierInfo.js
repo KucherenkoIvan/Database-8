@@ -1,16 +1,16 @@
 import React, { useState } from "react"
-
+import '../forms/style.scss'
 
 
 const CourierInfo = () =>{
-/*setInputValue({...inputValue, [event.target.name]: event.target.value})*/
+
     const [inputValue, setInputValue] = useState({
         id: 0,
-        FName: "",
-        MName: "",
-        LName: "",
-        Salary: 0,
-        PriorSalary: 0
+        CourierID: 0,
+        BirthDate: new Date(),
+        Address: "",
+        Phone: ""
+        
     });
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
@@ -21,26 +21,22 @@ const CourierInfo = () =>{
                 <input onChange={changeHandler} className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">FName</label>
-                <input className="input" name="FName" onChange={changeHandler}></input>
-            </div>
-            <div className="block">
-                <label className="label">MName</label>
-                <input className="input" name="MName" onChange={changeHandler}></input>
-            </div>
-            <div className="block">
-                <label className="label">LName</label>
-                <input className="input" name="LName" onChange={changeHandler}></input>
-            </div>
-            <div className="block">
-                <label className="label">Salary</label>
-                <input className="input" name="Salary" onChange={changeHandler}></input>
-            </div>
-            <div className="block">
-                <label className="label">PriorSalary</label>
-                <input className="input" name="PriorSalary" onChange={changeHandler}></input>
+                <label className="label">CourierID</label>
+                <input onChange={changeHandler} className="input" name="CourierID" />
             </div>
 
+            <div className="block">
+                <label className="label">BirthDate</label>
+                <input onChange={changeHandler} type="date" className="input" name="BirthDate" />
+            </div>
+            <div className="block">
+                <label className="label">Address</label>
+                <input onChange={changeHandler} className="input" name="Address" />
+            </div>
+            <div className="block">
+                <label className="label">Phone</label>
+                <input onChange={changeHandler} className="input" name="Phone" />
+            </div>
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>
