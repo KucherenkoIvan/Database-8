@@ -1,6 +1,8 @@
 @import "../../vars.scss";
 
 .aside{
+    min-width: 320px;
+    max-width: 450px;
     border: 1px solid rgba(#101010,.3);
     color: $primary-white;
     background-color: $header-black;

@@ -1,0 +1,43 @@
+@import "../../vars.scss";
+
+.formName{
+    margin: 15px;
+    font-size: 30px;
+}
+
+.block{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 10px;
+}
+.laber{
+    font-size: 15px;
+}
+.input{
+    width: 60%;
+    padding: 2px;
+}
+
+.button {
+    transition: 0.2s ease;
+    background-color: transparent;
+    padding: 0.3rem 1rem;
+    border: 1px solid #999;
+    border-radius: 3px;
+    color: #999;
+
+    &:focus {
+        background-color: #37373d;
+        color: white;
+        outline: none;
+        box-shadow: 0px 0px 5px #06c;
+        border: 1px solid #06c;
+    }
+
+/*submit and register*/
+    &:hover {
+        transition: 0.2s ease;
+        background-color: #37373d;
+        color: #f5f5f5
+        }
+}
