@@ -5,9 +5,9 @@ const Courier = () =>{
 /*setInputValue({...inputValue, [event.target.name]: event.target.value})*/
     const [inputValue, setInputValue] = useState({
         id: 0,
-        FName: "",
-        MName: "",
-        LName: "",
+        FName: '',
+        MName: '',
+        LName: '',
         Salary: 0,
         PriorSalary: 0
     });
@@ -17,7 +17,7 @@ const Courier = () =>{
             <label className="formName">Courier</label>
             <div className="block">
                 <label className="label">ID</label>
-                <input onChange={changeHandler} className="input" name="id" />
+                <input disabled className="input" name="id" />
             </div>
             <div className="block">
                 <label className="label">FName</label>
