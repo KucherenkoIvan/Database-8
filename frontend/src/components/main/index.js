@@ -1,10 +1,16 @@
 import React from 'react';
 import { tablePrefabs } from './tablePrefabs';
+import { connect } from 'react-redux';
 import './index.scss';
 
-const Main = () => {
-    const selectedTable = 'Courier'; // Replace when Redux will be done
-
+const Main = ({ selectedTable }) => {
+    if (selectedTable === 'About') {
+        return (
+            <main className="main">
+                <h2>About Us</h2>
+            </main>
+        )
+    }
     return (
         <main className="main">
             <table className="table">
@@ -18,4 +24,10 @@ const Main = () => {
     );
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+    return {
+        selectedTable: state.option
+    }
+}
+
+export default connect(mapStateToProps, null)(Main);

@@ -1,11 +1,4 @@
-import {SET_TEST, SET_OPTION} from './actions';
-
-export function setTest(payload) {
-    return {
-        type: SET_TEST,
-        payload
-    }
-}
+import {SET_OPTION} from './actions';
 
 export function setOption(payload) {
     return {
