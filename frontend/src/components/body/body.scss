@@ -2,5 +2,7 @@
 
 
 .body{
-    background-color: #212121;
+    display: flex;
+    background-color: $main-gray;
+    justify-items: space-between;
 }

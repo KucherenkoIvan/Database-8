@@ -1,0 +1,29 @@
+@import "../../vars.scss";
+
+.main {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+}
+.table {
+    margin: 20px 0;
+    width: 90%;
+    border-collapse: collapse;
+}
+.table td {
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+    color: $primary-white;
+}
+.table tr {
+    &:nth-child(1) {
+        background-color: $black !important;
+        color: white;
+        font-weight: bold;
+    }
+
+    &:nth-child(odd) {
+        background-color: $header-black;
+    }
+}
