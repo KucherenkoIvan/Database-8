@@ -11,15 +11,15 @@ const Stocks = () =>{
         <div className="stocks">
             <label className="formName">Stocks</label>
             <div className="block">
-                <label className="label">ID</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">ProductID</label>
+                <label className="label" htmlfor="ProductID">ProductID</label>
                 <input onChange={changeHandler} className="input" name="ProductID" />
             </div>
             <div className="block">
-                <label className="label">Qty</label>
+                <label className="label" htmlfor="Qty">Qty</label>
                 <input onChange={changeHandler} className="input" name="Qty" />
             </div>
             <div className="block block__button">

@@ -16,27 +16,27 @@ const Courier = () =>{
         <div className="courier">
             <label className="formName">Courier</label>
             <div className="block">
-                <label className="label">ID</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">FName</label>
+                <label className="label" htmlfor="FName">FName</label>
                 <input className="input" name="FName" onChange={changeHandler}></input>
             </div>
             <div className="block">
-                <label className="label">MName</label>
+                <label className="label" htmlfor="MName">MName</label>
                 <input className="input" name="MName" onChange={changeHandler}></input>
             </div>
             <div className="block">
-                <label className="label">LName</label>
+                <label className="label" htmlfor="LName">LName</label>
                 <input className="input" name="LName" onChange={changeHandler}></input>
             </div>
             <div className="block">
-                <label className="label">Salary</label>
+                <label className="label" htmlfor="Salary">Salary</label>
                 <input className="input" name="Salary" onChange={changeHandler}></input>
             </div>
             <div className="block">
-                <label className="label">PriorSalary</label>
+                <label className="label" htmlfor="PriorSalary">PriorSalary</label>
                 <input className="input" name="PriorSalary" onChange={changeHandler}></input>
             </div>
 

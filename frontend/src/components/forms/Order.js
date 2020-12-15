@@ -12,19 +12,19 @@ const Order = () =>{
         <div className="order">
             <label className="formName">Order</label>
             <div className="block">
-                <label className="label">ID</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">CustomerID</label>
+                <label className="label" htmlfor="CustomerID">CustomerID</label>
                 <input onChange={changeHandler} className="input" name="CustomerID" />
             </div>
             <div className="block">
-                <label className="label">EmployeeID</label>
+                <label className="label" htmlfor="EmployeeID">EmployeeID</label>
                 <input onChange={changeHandler} className="input" name="EmployeeID" />
             </div>
             <div className="block">
-                <label className="label">OrderDate</label>
+                <label className="label" htmlfor="OrderDate">OrderDate</label>
                 <input onChange={changeHandler} type="date" className="input" name="OrderDate" />
             </div>
             <div className="block block__button">

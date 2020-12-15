@@ -15,31 +15,31 @@ const OrderDetails = () =>{
         <div className="orderDetails">
             <label className="formName">OrderDetails</label>
             <div className="block">
-                <label className="label">ID</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">OrderID</label>
+                <label className="label" htmlfor="OrderID">OrderID</label>
                 <input onChange={changeHandler} className="input" name="OrderID" />
             </div>
             <div className="block">
-                <label className="label">LineItem</label>
+                <label className="label" htmlfor="LineItem">LineItem</label>
                 <input onChange={changeHandler} className="input" name="LineItem" />
             </div>
             <div className="block">
-                <label className="label">ProductID</label>
+                <label className="label" htmlfor="ProductID">ProductID</label>
                 <input onChange={changeHandler} className="input" name="ProductID" />
             </div>
             <div className="block">
-                <label className="label">Qty</label>
+                <label className="label" htmlfor="Qty">Qty</label>
                 <input onChange={changeHandler} className="input" name="Qty" />
             </div>
             <div className="block">
-                <label className="label">Price</label>
+                <label className="label" htmlfor="Price">Price</label>
                 <input onChange={changeHandler} className="input" name="Price" />
             </div>
             <div className="block">
-                <label className="label">TotalPrice</label>
+                <label className="label" htmlfor="TotalPrice">TotalPrice</label>
                 <input onChange={changeHandler} className="input" name="TotalPrice" />
             </div>
             <div className="block block__button">
