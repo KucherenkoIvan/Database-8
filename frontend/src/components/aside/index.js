@@ -2,6 +2,7 @@ import React from "react"
 import Courier from "../forms/Courier"
 import CourierInfo from "../forms/CourierInfo"
 import Customers from "../forms/Customer"
+import Login from "../forms/login"
 import Order from "../forms/Order"
 import OrderDetails from "../forms/OrderDetails"
 import Product from "../forms/Product"
@@ -14,7 +15,7 @@ const Aside = () =>{
 
     return (
         <aside className="aside">
-            <User/>
+            <Login></Login>
         </aside>
     );
 }
