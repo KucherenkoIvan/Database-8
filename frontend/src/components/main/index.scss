@@ -28,6 +28,8 @@
     }
 
     tbody tr {
+        cursor: pointer;
+        
         &:nth-child(even) {
             background-color: $header-black;
             transition: 0.2s ease;
