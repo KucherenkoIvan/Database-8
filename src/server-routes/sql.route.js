@@ -3,12 +3,12 @@ const sequelize = require('../sequelize');
 
 const router = Router();
 
-router.get('/api/sql', async (req, res) => {
-    const queryString = req.query.sql;
-    console.log(req.query);
+router.get('/api/sql/:sql', async (req, res) => {
+    const queryString = req.params.sql;
+    console.log(req.params);
     try {
         const result = await sequelize.query(queryString)
-        res.json(result);
+        res.json(result[0]);
     } catch (e) {
         res.json(e.message);
     }
