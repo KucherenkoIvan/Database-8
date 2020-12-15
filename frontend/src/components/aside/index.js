@@ -9,7 +9,7 @@ import Product from "../forms/Product"
 import Stocks from "../forms/Stocks"
 import User from "../forms/User"
 import { connect } from 'react-redux';
-import './index.scss'
+import './index.scss';
 
 const forms = { Courier, Stocks, User, Customer, Product, Order, OrderDetails, CourierInfo, none: () => '' };
 
