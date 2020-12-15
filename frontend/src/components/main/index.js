@@ -1,5 +1,5 @@
 import React from 'react';
-import { tablePrefabs } from './tablePrefabs';
+import { tablePrefabs } from '../../models/tablePrefabs';
 import { connect } from 'react-redux';
 import './index.scss';
 

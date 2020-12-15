@@ -2,7 +2,7 @@ import React from "react";
 import {setOption} from '../../redux/actionCreators';
 import {connect} from 'react-redux';
 import './index.scss';
-import { tablePrefabs } from "../main/tablePrefabs";
+import { tablePrefabs } from '../../models/tablePrefabs';
 
 const Header = ({ setOption }) =>{
 

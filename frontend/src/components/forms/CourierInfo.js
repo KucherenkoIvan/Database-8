@@ -1,9 +1,10 @@
-import React, { useState } from "react"
-import '../forms/style.scss'
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { tablePrefabs } from "../../models/tablePrefabs";
+import '../forms/style.scss';
 
 
-const CourierInfo = () =>{
-
+const CourierInfo = ({ userInfo }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         CourierID: 0,
@@ -12,6 +13,7 @@ const CourierInfo = () =>{
         Phone: ''
         
     });
+    const table = tablePrefabs.CourierInfo;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="courierInfo">
@@ -37,12 +39,18 @@ const CourierInfo = () =>{
                 <label className="label" htmlfor="Phone">Phone</label>
                 <input onChange={changeHandler} className="input" name="Phone" />
             </div>
-            <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                <button className="button button__cancel">Отмена</button>
-            </div>
+            {userInfo.accessLevel >= table.requiredRights &&
+                <div className="block block__button">
+                    <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
+                    <button className="button button__cancel">Отмена</button>
+                </div>
+            }
         </div>
     );
 }
 
-export default CourierInfo;
+const mapStateToProps= (state) => ({
+    userInfo: state.userInfo // undefined
+})
+
+export default connect(mapStateToProps, null)(CourierInfo);

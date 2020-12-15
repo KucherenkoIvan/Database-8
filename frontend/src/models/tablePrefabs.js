@@ -1,3 +1,5 @@
+import { accessLevels } from './accessLevels';
+
 export const tablePrefabs = {
     Customer: {
         name: 'Customer',
@@ -11,6 +13,7 @@ export const tablePrefabs = {
             'Phone',
             'DateInSystem',
         ],
+    requiredRights: accessLevels['read-only']
     },
     Courier: {
         name: 'Courier',
