@@ -17,24 +17,24 @@ const CourierInfo = () =>{
         <div className="courierInfo">
             <label className="formName">CourierInfo</label>
             <div className="block">
-                <label className="label">ID</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">CourierID</label>
+                <label className="label" htmlfor="CourierID">CourierID</label>
                 <input onChange={changeHandler} className="input" name="CourierID" />
             </div>
 
             <div className="block">
-                <label className="label">BirthDate</label>
+                <label className="label" htmlfor="BirthDate">BirthDate</label>
                 <input onChange={changeHandler} type="date" className="input" name="BirthDate" />
             </div>
             <div className="block">
-                <label className="label">Address</label>
+                <label className="label" htmlfor="Address">Address</label>
                 <input onChange={changeHandler} className="input" name="Address" />
             </div>
             <div className="block">
-                <label className="label">Phone</label>
+                <label className="label" htmlfor="Phone">Phone</label>
                 <input onChange={changeHandler} className="input" name="Phone" />
             </div>
             <div className="block block__button">

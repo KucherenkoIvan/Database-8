@@ -10,11 +10,11 @@ const Login = () =>{
         <div className="login">
             <label className="formName">User</label>
             <div className="block">
-                <label className="label">login</label>
+                <label className="label" htmlfor="login">login</label>
                 <input onChange={changeHandler} className="input" name="login" />
             </div>
             <div className="block">
-                <label className="label">password</label>
+                <label className="label" htmlfor="password">password</label>
                 <input onChange={changeHandler} className="input" name="password" />
             </div>
             <div className="block block__button">

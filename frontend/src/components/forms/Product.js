@@ -11,15 +11,15 @@ const Product = () =>{
         <div className="product">
             <label className="formName">Product</label>
             <div className="block">
-                <label className="label">id</label>
+                <label className="label" htmlfor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label">Name</label>
+                <label className="label" htmlfor="Name">Name</label>
                 <input onChange={changeHandler} className="input" name="Name" />
             </div>
             <div className="block">
-                <label className="label">Description</label>
+                <label className="label" htmlfor="Description">Description</label>
                 <input onChange={changeHandler} className="input" name="Description" />
             </div>
             <div className="block block__button">
