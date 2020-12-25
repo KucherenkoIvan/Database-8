@@ -1,9 +1,9 @@
 import React from 'react';
-import { tablePrefabs } from './tablePrefabs';
+import { tablePrefabs } from '../../models/tablePrefabs';
 import { connect } from 'react-redux';
 import './index.scss';
 
-const Main = ({ selectedTable }) => {
+const Main = ({ selectedTable, data }) => {
     if (selectedTable === 'About') {
         return (
             <main className="main">
@@ -11,14 +11,27 @@ const Main = ({ selectedTable }) => {
             </main>
         )
     }
+    const availableFields = tablePrefabs[selectedTable].fields;
     return (
         <main className="main">
             <table className="table">
-                <tr>
-                    {tablePrefabs[selectedTable].fields.map(field => (
-                        <td>{field}</td>
-                    ))}
-                </tr>
+                <thead>
+                    <tr>
+                        {availableFields.map(field => (
+                            <td key={field}>{field}</td>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.model === selectedTable &&
+                        data.rows.map(row => 
+                            (<tr key={row.id}>{Object.keys(row).map(
+                                key => availableFields.includes(key) && (<td key={key}>{row[key]}</td>)
+                                )}
+                            </tr>)
+                        )
+                    }
+                </tbody>
             </table>
         </main>
     );
@@ -26,7 +39,7 @@ const Main = ({ selectedTable }) => {
 
 const mapStateToProps = (state) => {
     return {
-        selectedTable: state.option
+        selectedTable: state.option, data: state.data
     }
 }
 

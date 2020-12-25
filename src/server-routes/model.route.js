@@ -9,6 +9,7 @@ const models = {
     Stocks: require('../models/Stocks.model'),
     Order: require('../models/Order.model'),
     OrderDetails: require('../models/OrderDetails.model'),
+    User: require('../models/User.model'),
 };
 
 const router = Router();

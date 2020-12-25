@@ -1,5 +1,8 @@
+import { accessLevels } from './accessLevels';
+
 export const tablePrefabs = {
     Customer: {
+        name: 'Customer',
         fields: [
             'id',
             'FName',
@@ -10,8 +13,10 @@ export const tablePrefabs = {
             'Phone',
             'DateInSystem',
         ],
+    requiredRights: accessLevels['read-only']
     },
     Courier: {
+        name: 'Courier',
         fields: [
             'id',
             'FMame',
@@ -23,6 +28,7 @@ export const tablePrefabs = {
     requiredRights: accessLevels['read-only']
     },
     CourierInfo: {
+        name: 'CourierInfo',
         fields: [
             'id',
             'CourierID',
@@ -33,6 +39,7 @@ export const tablePrefabs = {
     requiredRights: accessLevels['read-only']
     },
     Product: {
+        name: 'Product',
         fields: [
             'id',
             'Name',
@@ -41,6 +48,7 @@ export const tablePrefabs = {
     requiredRights: accessLevels['read-only']    
     },
     Stocks: {
+        name: 'Stocks',
         fields: [
             'id',
             'ProductID',
@@ -49,6 +57,7 @@ export const tablePrefabs = {
     requiredRights: accessLevels['read-only']
     },
     Order: {
+        name: 'Order',
         fields: [
             'id',
             'CustomerID',
@@ -58,6 +67,7 @@ export const tablePrefabs = {
     requiredRights: accessLevels['read-only']
     },
     OrderDetails: {
+        name: 'OrderDetails',
         fields: [
             'id',
             'OrderID',

@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
     try {
         console.log(req.body)
                 
-        if (!req.body || !req.body.Login || !req.body.Password) {
+        if (!req.body || !req.body.login || !req.body.password) {
             console.log('Введите логин и пароль')
             return res.status(500).json({
                 error: {
@@ -19,9 +19,9 @@ router.post('/login', async (req, res) => {
                 }
             })
         }
-        const {Login, Password} = req.body
+        const {login, password} = req.body
         console.log(1)
-        const candidate = await User.findOne({where: {Login}})
+        const candidate = await User.findOne({where: {login}})
         // пользователь не найден
         if (!candidate) {
             console.log('Пользователя с таким логином не существует')
@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
             })
         }
         const candidatePassword = candidate.Password
-        if (!await bcrypt.compare(Password, candidatePassword)) { //пароли не совпали
+        if (!await bcrypt.compare(password, candidatePassword)) { //пароли не совпали
             console.log('Некорректный пароль')
             return res.status(500).json({
                 error: {
@@ -42,7 +42,10 @@ router.post('/login', async (req, res) => {
         }
         //если все ок:
         const token = jwt.sign(
-            {userID: candidate.id},
+            {
+                id: candidate.id,
+                accessLevel: candidate.accessLevel
+            },
             config.get('jwt-secret'),
             {expiresIn: '1h'})
 

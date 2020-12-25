@@ -2,6 +2,7 @@ import React from "react";
 import {setOption} from '../../redux/actionCreators';
 import {connect} from 'react-redux';
 import './index.scss';
+import { tablePrefabs } from '../../models/tablePrefabs';
 
 const Header = ({ setOption }) =>{
 
@@ -9,14 +10,8 @@ const Header = ({ setOption }) =>{
         <header className="header">
             <img alt="R" className="logo" src="https://cdn.discordapp.com/attachments/612623022884388864/785109194268999700/i4601546127686-removebg-preview.png"></img>
             <select className="input input_w10" defaultValue="About" onChange={(event) => setOption(event.target.value)}>
-                <option value="About">О нас</option>
-                <option value="Customer">Customers</option>
-                <option value="Courier">Courier</option>
-                <option value="CourierInfo">CourierInfo</option>
-                <option value="Product">Products</option>
-                <option value="Stocks">Stocks</option>
-                <option value="Order">Orders</option>
-                <option value="OrderDetails">OrderDetails</option>
+                <option value="About">About</option>
+                {Object.keys(tablePrefabs).map(key => <option value={key} key={key}>{key}</option>)}
             </select>
             <div className="header__right">
                 <button className="button">Настройки</button>
