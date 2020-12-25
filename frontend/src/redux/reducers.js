@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {SET_AUTH_DATA, SET_DATA, SET_OPTION} from './actions';
+import {SET_AUTH_DATA, SET_DATA, SET_ITEM, SET_OPTION} from './actions';
 
 const optionReducer = (state = 'About', action) => {
     switch (action.type) {
@@ -22,4 +22,13 @@ const userInfoReducer = (state = {authorizationStatus: 'non-authorized'}, action
     }
 }
 
-export const rootReducer = combineReducers({option: optionReducer, data: dataReducer, userInfo: userInfoReducer});
+const itemReducer = (state = null, action) => {
+    switch (action.type) {
+        case SET_ITEM: {
+            return action.payload;
+        }
+        default: return state;
+    }
+}
+
+export const rootReducer = combineReducers({option: optionReducer, data: dataReducer, userInfo: userInfoReducer, selectedItem: itemReducer});

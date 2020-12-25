@@ -1,9 +1,10 @@
 import React from 'react';
 import { tablePrefabs } from '../../models/tablePrefabs';
 import { connect } from 'react-redux';
+import {setItem} from '../../redux/actionCreators';
 import './index.scss';
 
-const Main = ({ selectedTable, data }) => {
+const Main = ({ selectedTable, data, setItem }) => {
     if (selectedTable === 'About') {
         return (
             <main className="main">
@@ -25,8 +26,8 @@ const Main = ({ selectedTable, data }) => {
                 <tbody>
                     {data.model === selectedTable &&
                         data.rows.map(row => 
-                            (<tr key={row.id}>{Object.keys(row).map(
-                                key => availableFields.includes(key) && (<td key={key}>{row[key]}</td>)
+                            (<tr key={row.id} id={row.id} onClick={(event) => setItem(data.rows.find(rw => rw.id === Number(event.target.id)))}>{Object.keys(row).map(
+                                key => availableFields.includes(key) && (<td key={key} id={row.id}>{row[key]}</td>)
                                 )}
                             </tr>)
                         )
@@ -43,4 +44,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Main);
+const mapDispatchToProps = {
+    setItem,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

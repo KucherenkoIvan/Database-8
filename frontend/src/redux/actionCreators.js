@@ -1,4 +1,4 @@
-import {SET_OPTION, SET_DATA, SET_AUTH_DATA} from './actions';
+import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM} from './actions';
 
 export function setOption(payload) {
     return dispatch => {
@@ -6,6 +6,12 @@ export function setOption(payload) {
             dispatch(loadData(payload))
         }
         dispatch({ type: SET_OPTION, payload});
+    } 
+}
+
+export function setItem(payload) {
+    return dispatch => {
+        dispatch({ type: SET_ITEM, payload});
     } 
 }
 
@@ -42,7 +48,7 @@ export function login(payload) {
             console.log(token, userID, accessLevel)
             dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } })
         }
-        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер ушел в отпуск на карибы"} }) }
+        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Никто:\nАбсолютно никто:\nСервер: Я упал((9(9(("} }) }
     } 
 }
 

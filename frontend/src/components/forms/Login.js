@@ -24,7 +24,7 @@ const Login = ({ login, userInfo }) =>{
                     <button onClick={() => {login(inputValue); console.log(inputValue)}} className="button button__save">Войти</button>
                 </div>
                 { userInfo.authorizationStatus === 'error' &&
-                    <div className="error">{userInfo.errorMessage}</div>
+                    <div className="error">{userInfo.errorMessage.split('\n').map(line => <>{line}<br/></>)}</div>
                 }
             </div>
         );
