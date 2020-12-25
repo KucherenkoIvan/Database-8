@@ -1,6 +1,9 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { tablePrefabs } from "../../models/tablePrefabs";
+import '../forms/style.scss';
 
-const Customers = () =>{
+const Customers = ({ userInfo }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         FName: '',
@@ -11,6 +14,7 @@ const Customers = () =>{
         Phone: '',
         DateInSystem: new Date()
     });
+    const table = tablePrefabs.Customers;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="customers">
@@ -47,12 +51,18 @@ const Customers = () =>{
                 <label className="label" htmlfor="DateInSystem">DateInSystem</label>
                 <input type="date" disabled onChange={changeHandler} className="input" name="DateInSystem" />
             </div>
+            {   userInfo.accessLevel >= table.requiredRights &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>
             </div>
+            }
         </div>
     );
 }
+const mapStateToProps= (state) => ({
+    userInfo: state.userInfo // undefined
+})
 
-export default Customers;
+
+export default connect(mapStateToProps, null)(Customers);

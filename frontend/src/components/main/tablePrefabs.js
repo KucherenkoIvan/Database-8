@@ -20,6 +20,7 @@ export const tablePrefabs = {
             'Salary',
             'PriorSalary',
         ],
+    requiredRights: accessLevels['read-only']
     },
     CourierInfo: {
         fields: [
@@ -29,6 +30,7 @@ export const tablePrefabs = {
             'Address',
             'Phone',
         ],
+    requiredRights: accessLevels['read-only']
     },
     Product: {
         fields: [
@@ -36,6 +38,7 @@ export const tablePrefabs = {
             'Name',
             'Descriprion',
         ],
+    requiredRights: accessLevels['read-only']    
     },
     Stocks: {
         fields: [
@@ -43,6 +46,7 @@ export const tablePrefabs = {
             'ProductID',
             'Qty',
         ],
+    requiredRights: accessLevels['read-only']
     },
     Order: {
         fields: [
@@ -51,6 +55,7 @@ export const tablePrefabs = {
             'CourierID',
             'OrderDate',
         ],
+    requiredRights: accessLevels['read-only']
     },
     OrderDetails: {
         fields: [
@@ -62,5 +67,16 @@ export const tablePrefabs = {
             'Price',
             'TotalPrice',
         ],
+    requiredRights: accessLevels['read-only']
+    },    
+    User: {
+        name: 'User',
+        fields: [
+            'id',
+            'login',
+            'password',
+            'accessLevel'
+        ],
+    requiredRights: accessLevels['user-control']
     },
 };
