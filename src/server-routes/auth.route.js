@@ -20,7 +20,6 @@ router.post('/login', async (req, res) => {
             })
         }
         const {login, password} = req.body
-        console.log(1)
         const candidate = await User.findOne({where: {login}})
         // пользователь не найден
         if (!candidate) {
@@ -31,8 +30,7 @@ router.post('/login', async (req, res) => {
                 }
             })
         }
-        const candidatePassword = candidate.Password
-        if (!await bcrypt.compare(password, candidatePassword)) { //пароли не совпали
+        if (!await bcrypt.compare(password, candidate.password)) { //пароли не совпали
             console.log('Некорректный пароль')
             return res.status(500).json({
                 error: {
@@ -49,8 +47,9 @@ router.post('/login', async (req, res) => {
             config.get('jwt-secret'),
             {expiresIn: '1h'})
 
-        res.json({token, userID: candidate.id})
+        res.json({token, userID: candidate.id, accessLevel: candidate.accessLevel})
     } catch (e) {
+        console.log(e);
         res.status(500).json({
             error: {
                 msg: e.message
