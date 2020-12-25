@@ -6,6 +6,11 @@ const sequelize = require('../sequelize');
             type: DataTypes.DATE,
             allowNull: false
         },
+        CourierID: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: true,
+        },
         Address: {
             type: DataTypes.STRING,
             allowNull: false
