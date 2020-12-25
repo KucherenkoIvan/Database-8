@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import {connect} from 'react-redux';
+import {login} from '../../redux/actionCreators';
 
 const Login = () =>{
     const [inputValue, setInputValue] = useState({
@@ -18,11 +20,15 @@ const Login = () =>{
                 <input onChange={changeHandler} className="input" name="password" />
             </div>
             <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Войти</button>
+                <button onClick={() => login(inputValue)} className="button button__save">Войти</button>
                 <button className="button button__cancel">Отмена</button>
             </div>
         </div>
     );
 }
 
-export default Login;
+const mapDispatchToProps = {
+    login
+}
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
             config.get('jwt-secret'),
             {expiresIn: '1h'})
 
-        res.json({token, userID: candidate.id})
+        res.json({token, userID: candidate.id, accessLevel})
     } catch (e) {
         res.status(500).json({
             error: {
