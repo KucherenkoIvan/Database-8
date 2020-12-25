@@ -11,13 +11,24 @@ import User from "../forms/User";
 import { connect } from 'react-redux';
 import './index.scss';
 
-const forms = { Courier, Stocks, User, Customer, Product, Order, OrderDetails, CourierInfo, none: () => '' };
+const forms = { Courier, Stocks, User, Customer, Product, Order, OrderDetails, CourierInfo };
 
 const Aside = ({ selectedTable }) =>{
 
+    let form = '';
+    switch (selectedTable) {
+        case 'Courier': form = (<Courier/>); break;
+        case 'Stocks': form = (<Stocks/>); break;
+        case 'User': form = (<User/>); break;
+        case 'Customer': form = (<Customer/>); break;
+        case 'Product': form = (<Product/>); break;
+        case 'Order': form = (<Order/>); break;
+        case 'OrderDetails': form = (<OrderDetails/>); break;
+        case 'CourierInfo': form = (<CourierInfo/>); break;
+    }
     return (
         <aside className="aside">
-            {forms[selectedTable]()}
+            { form }
         </aside>
     );
 }
