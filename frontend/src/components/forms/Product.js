@@ -11,23 +11,24 @@ const Product = ({ userInfo }) =>{
         Description : ''
     });
     const table = tablePrefabs.Product;
+    const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="product">
             <label className="formName">Product</label>
             <div className="block">
-                <label className="label" htmlfor="id">ID</label>
+                <label className="label" htmlFor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Name">Name</label>
-                <input onChange={changeHandler} className="input" name="Name" />
+                <label className="label" htmlFor="Name">Name</label>
+                <input onChange={changeHandler} className="input" name="Name" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Description">Description</label>
-                <input onChange={changeHandler} className="input" name="Description" />
+                <label className="label" htmlFor="Description">Description</label>
+                <input onChange={changeHandler} className="input" name="Description" disabled={!canWrite} />
             </div>
-            {  accessLevels[userInfo.accessLevel] >= table.requiredRights.write &&
+            { canWrite &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>

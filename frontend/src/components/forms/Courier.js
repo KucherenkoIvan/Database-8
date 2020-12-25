@@ -15,35 +15,36 @@ const Courier = ({ userInfo }) =>{
         PriorSalary: 0
     });
     const table = tablePrefabs.Courier;
+    const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="courier">
             <label className="formName">Courier</label>
             <div className="block">
-                <label className="label" htmlfor="id">ID</label>
+                <label className="label" htmlFor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label" htmlfor="FName">FName</label>
-                <input className="input" name="FName" onChange={changeHandler}></input>
+                <label className="label" htmlFor="FName">FName</label>
+                <input className="input" name="FName" onChange={changeHandler} disabled={!canWrite}></input>
             </div>
             <div className="block">
-                <label className="label" htmlfor="MName">MName</label>
-                <input className="input" name="MName" onChange={changeHandler}></input>
+                <label className="label" htmlFor="MName">MName</label>
+                <input className="input" name="MName" onChange={changeHandler} disabled={!canWrite}></input>
             </div>
             <div className="block">
-                <label className="label" htmlfor="LName">LName</label>
-                <input className="input" name="LName" onChange={changeHandler}></input>
+                <label className="label" htmlFor="LName">LName</label>
+                <input className="input" name="LName" onChange={changeHandler} disabled={!canWrite}></input>
             </div>
             <div className="block">
-                <label className="label" htmlfor="Salary">Salary</label>
-                <input className="input" name="Salary" onChange={changeHandler}></input>
+                <label className="label" htmlFor="Salary">Salary</label>
+                <input className="input" name="Salary" onChange={changeHandler} disabled={!canWrite}></input>
             </div>
             <div className="block">
-                <label className="label" htmlfor="PriorSalary">PriorSalary</label>
-                <input className="input" name="PriorSalary" onChange={changeHandler}></input>
+                <label className="label" htmlFor="PriorSalary">PriorSalary</label>
+                <input className="input" name="PriorSalary" onChange={changeHandler} disabled={!canWrite}></input>
             </div>
-            {  accessLevels[userInfo.accessLevel] >= table.requiredRights.write &&
+            {  canWrite &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>

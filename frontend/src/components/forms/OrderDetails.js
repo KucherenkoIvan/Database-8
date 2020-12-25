@@ -15,39 +15,40 @@ const OrderDetails = ({ userInfo }) =>{
         TotalPrice: 0
     });
     const table = tablePrefabs.OrderDetails;
+    const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="orderDetails">
             <label className="formName">OrderDetails</label>
             <div className="block">
-                <label className="label" htmlfor="id">ID</label>
+                <label className="label" htmlFor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label" htmlfor="OrderID">OrderID</label>
-                <input onChange={changeHandler} className="input" name="OrderID" />
+                <label className="label" htmlFor="OrderID">OrderID</label>
+                <input onChange={changeHandler} className="input" name="OrderID" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="LineItem">LineItem</label>
-                <input onChange={changeHandler} className="input" name="LineItem" />
+                <label className="label" htmlFor="LineItem">LineItem</label>
+                <input onChange={changeHandler} className="input" name="LineItem" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="ProductID">ProductID</label>
-                <input onChange={changeHandler} className="input" name="ProductID" />
+                <label className="label" htmlFor="ProductID">ProductID</label>
+                <input onChange={changeHandler} className="input" name="ProductID" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Qty">Qty</label>
-                <input onChange={changeHandler} className="input" name="Qty" />
+                <label className="label" htmlFor="Qty">Qty</label>
+                <input onChange={changeHandler} className="input" name="Qty" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Price">Price</label>
-                <input onChange={changeHandler} className="input" name="Price" />
+                <label className="label" htmlFor="Price">Price</label>
+                <input onChange={changeHandler} className="input" name="Price" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="TotalPrice">TotalPrice</label>
-                <input onChange={changeHandler} className="input" name="TotalPrice" />
+                <label className="label" htmlFor="TotalPrice">TotalPrice</label>
+                <input onChange={changeHandler} className="input" name="TotalPrice" disabled={!canWrite} />
             </div>
-            {  accessLevels[userInfo.accessLevel] >= table.requiredRights.write &&
+            { canWrite &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>

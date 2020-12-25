@@ -20,25 +20,29 @@ export function loadData(payload) {
 
 export function login(payload) {
     return async dispatch => {
-        const {login, password} = payload;
-        const serverResponse = await fetch(
-            '/api/auth/login', 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login,
-                    password,
-                })
-            });
-        const {token, userID, accessLevel} = await serverResponse.json();
-        if (!token || !userID || !accessLevel) {
-            dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error' } })
+        dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'pending' } })
+        try {
+            const {login, password} = payload;
+            const serverResponse = await fetch(
+                '/api/auth/login', 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        login,
+                        password,
+                    })
+                });
+            const {token, userID, accessLevel, error} = await serverResponse.json();
+            if (error) {
+                return dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: error.msg} })
+            }
+            console.log(token, userID, accessLevel)
+            dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } })
         }
-        console.log(token, userID, accessLevel)
-        dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } })
+        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер ушел в отпуск на карибы"} }) }
     } 
 }
 

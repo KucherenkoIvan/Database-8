@@ -13,7 +13,7 @@ const Header = ({ setOption, userInfo, logout }) =>{
             <select className="input input_w10" defaultValue="About" onChange={(event) => setOption(event.target.value)}>
                 <option value="About">About</option>
 
-                {userInfo.authorizationStatus !== 'non-authorized' && 
+                {userInfo.token && 
                 Object.keys(tablePrefabs).map(key => 
                     tablePrefabs[key].requiredRights.read <= accessLevels[userInfo.accessLevel] &&
                     <option value={key} key={key}>{key}</option>
@@ -21,8 +21,9 @@ const Header = ({ setOption, userInfo, logout }) =>{
 
             </select>
             <div className="header__right">
-                <button className="button">Настройки</button>
+            {   userInfo.token &&
                 <button className="button" onClick={() => logout()}>Выйти</button>
+            }
             </div>
         </header>
     );

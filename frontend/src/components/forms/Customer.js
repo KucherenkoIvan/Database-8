@@ -23,35 +23,35 @@ const Customers = ({ userInfo }) =>{
         <div className="customers">
             <label className="formName">Customers</label>
             <div className="block">
-                <label className="label" htmlfor="id">ID</label>
+                <label className="label" htmlFor="id">ID</label>
                 <input disabled className="input" name="id" />
             </div>
             <div className="block">
-                <label className="label" htmlfor="FName">FName</label>
+                <label className="label" htmlFor="FName">FName</label>
                 <input onChange={changeHandler} className="input" name="FName" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="MName">MName</label>
+                <label className="label" htmlFor="MName">MName</label>
                 <input onChange={changeHandler} className="input" name="MName" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="LName">LName</label>
+                <label className="label" htmlFor="LName">LName</label>
                 <input onChange={changeHandler} className="input" name="LName" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Address">Address</label>
+                <label className="label" htmlFor="Address">Address</label>
                 <input onChange={changeHandler} className="input" name="Address" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="City">City</label>
+                <label className="label" htmlFor="City">City</label>
                 <input onChange={changeHandler} className="input" name="City" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="Phone">Phone</label>
+                <label className="label" htmlFor="Phone">Phone</label>
                 <input onChange={changeHandler} className="input" name="Phone" disabled={!canWrite} />
             </div>
             <div className="block">
-                <label className="label" htmlfor="DateInSystem">DateInSystem</label>
+                <label className="label" htmlFor="DateInSystem">DateInSystem</label>
                 <input type="date" disabled onChange={changeHandler} className="input" name="DateInSystem" />
             </div>
             {  canWrite &&
