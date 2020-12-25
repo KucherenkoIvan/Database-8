@@ -22,7 +22,7 @@ export const tablePrefabs = {
         name: 'Courier',
         fields: [
             'id',
-            'FMame',
+            'FName',
             'MName',
             'LName',
             'Salary',

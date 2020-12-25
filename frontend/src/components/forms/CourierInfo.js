@@ -5,7 +5,7 @@ import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
 
-const CourierInfo = ({ userInfo }) =>{
+const CourierInfo = ({ userInfo, selectedItem  }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         CourierID: 0,
@@ -14,6 +14,10 @@ const CourierInfo = ({ userInfo }) =>{
         Phone: ''
         
     });
+    if (selectedItem && selectedItem.id !== inputValue.id) {
+        setInputValue(selectedItem);
+    }
+
     const table = tablePrefabs.CourierInfo;
     const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
@@ -22,24 +26,24 @@ const CourierInfo = ({ userInfo }) =>{
             <label className="formName">CourierInfo</label>
             <div className="block">
                 <label className="label" htmlFor="id">ID</label>
-                <input disabled className="input" name="id" />
+                <input disabled className="input" name="id" value={inputValue.id} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="CourierID">CourierID</label>
-                <input onChange={changeHandler} className="input" name="CourierID" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="CourierID" disabled={!canWrite} value={inputValue.CourierID} />
             </div>
 
             <div className="block">
                 <label className="label" htmlFor="BirthDate">BirthDate</label>
-                <input onChange={changeHandler} type="date" className="input" name="BirthDate" disabled={!canWrite} />
+                <input onChange={changeHandler} type="date" className="input" name="BirthDate" disabled={!canWrite} value={inputValue.BirthDate} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="Address">Address</label>
-                <input onChange={changeHandler} className="input" name="Address" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="Address" disabled={!canWrite} value={inputValue.Address} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="Phone">Phone</label>
-                <input onChange={changeHandler} className="input" name="Phone" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="Phone" disabled={!canWrite} value={inputValue.Phone} />
             </div>
             { canWrite &&
             <div className="block block__button">
@@ -52,7 +56,8 @@ const CourierInfo = ({ userInfo }) =>{
 }
 
 const mapStateToProps= (state) => ({
-    userInfo: state.userInfo // undefined
+    userInfo: state.userInfo,
+    selectedItem: state.selectedItem,
 })
 
 export default connect(mapStateToProps, null)(CourierInfo);
