@@ -2,7 +2,7 @@ import React from "react";
 import Courier from "../forms/Courier";
 import CourierInfo from "../forms/CourierInfo";
 import Customer from "../forms/Customer";
-import Login from "../forms/login";
+import Login from "../forms/Login";
 import Order from "../forms/Order";
 import OrderDetails from "../forms/OrderDetails";
 import Product from "../forms/Product";
@@ -10,8 +10,6 @@ import Stocks from "../forms/Stocks";
 import User from "../forms/User";
 import { connect } from 'react-redux';
 import './index.scss';
-
-const forms = { Courier, Stocks, User, Customer, Product, Order, OrderDetails, CourierInfo };
 
 const Aside = ({ selectedTable }) =>{
 
@@ -25,6 +23,8 @@ const Aside = ({ selectedTable }) =>{
         case 'Order': form = (<Order/>); break;
         case 'OrderDetails': form = (<OrderDetails/>); break;
         case 'CourierInfo': form = (<CourierInfo/>); break;
+        case 'About': form = (<Login/>); break;
+        default: break;
     }
     return (
         <aside className="aside">
@@ -35,7 +35,7 @@ const Aside = ({ selectedTable }) =>{
 
 const mapStateToProps = (state) => {
     return {
-        selectedTable: state.option === 'About' ? 'none' : state.option
+        selectedTable: state.option
     }
 }
 

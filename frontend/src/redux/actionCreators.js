@@ -42,8 +42,9 @@ export function login(payload) {
     } 
 }
 
-export function logout(payload) {
+export function logout() {
     return async dispatch => {
+        dispatch({ type: SET_OPTION, payload: 'About' });
         dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'non-authorized' } })
     } 
 }

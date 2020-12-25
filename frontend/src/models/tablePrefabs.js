@@ -13,7 +13,10 @@ export const tablePrefabs = {
             'Phone',
             'DateInSystem',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     Courier: {
         name: 'Courier',
@@ -25,7 +28,10 @@ export const tablePrefabs = {
             'Salary',
             'PriorSalary',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     CourierInfo: {
         name: 'CourierInfo',
@@ -36,7 +42,10 @@ export const tablePrefabs = {
             'Address',
             'Phone',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     Product: {
         name: 'Product',
@@ -45,7 +54,10 @@ export const tablePrefabs = {
             'Name',
             'Descriprion',
         ],
-    requiredRights: accessLevels['read-only']    
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     Stocks: {
         name: 'Stocks',
@@ -54,7 +66,10 @@ export const tablePrefabs = {
             'ProductID',
             'Qty',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     Order: {
         name: 'Order',
@@ -64,7 +79,10 @@ export const tablePrefabs = {
             'CourierID',
             'OrderDate',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },
     OrderDetails: {
         name: 'OrderDetails',
@@ -77,7 +95,10 @@ export const tablePrefabs = {
             'Price',
             'TotalPrice',
         ],
-    requiredRights: accessLevels['read-only']
+        requiredRights: {
+            read: accessLevels['read-only'],
+            write: accessLevels['read-write'],
+        }
     },    
     User: {
         name: 'User',
@@ -87,6 +108,9 @@ export const tablePrefabs = {
             'password',
             'accessLevel'
         ],
-    requiredRights: accessLevels['user-control']
+        requiredRights: {
+            read: accessLevels['user-control'],
+            write: accessLevels['user-control'],
+        }
     },
 };

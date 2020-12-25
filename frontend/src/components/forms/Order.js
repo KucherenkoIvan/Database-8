@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
+import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
@@ -31,7 +32,7 @@ const Order = ({ userInfo }) =>{
                 <label className="label" htmlfor="OrderDate">OrderDate</label>
                 <input onChange={changeHandler} type="date" className="input" name="OrderDate" />
             </div>
-            {   userInfo.accessLevel >= table.requiredRights &&
+            {  accessLevels[userInfo.accessLevel] >= table.requiredRights.write &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>
