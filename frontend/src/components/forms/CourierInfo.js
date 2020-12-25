@@ -39,11 +39,11 @@ const CourierInfo = ({ userInfo }) =>{
                 <label className="label" htmlfor="Phone">Phone</label>
                 <input onChange={changeHandler} className="input" name="Phone" />
             </div>
-            {userInfo.accessLevel >= table.requiredRights &&
-                <div className="block block__button">
-                    <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                    <button className="button button__cancel">Отмена</button>
-                </div>
+            { userInfo.accessLevel >= table.requiredRights &&
+            <div className="block block__button">
+                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
+                <button className="button button__cancel">Отмена</button>
+            </div>
             }
         </div>
     );

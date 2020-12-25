@@ -1,8 +1,10 @@
-import React, { useState } from "react"
-import '../forms/style.scss'
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { tablePrefabs } from "../../models/tablePrefabs";
+import '../forms/style.scss';
 
-const Courier = () =>{
-/*setInputValue({...inputValue, [event.target.name]: event.target.value})*/
+
+const Courier = ({ userInfo }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         FName: '',
@@ -11,6 +13,7 @@ const Courier = () =>{
         Salary: 0,
         PriorSalary: 0
     });
+    const table = tablePrefabs.Courier;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     return (
         <div className="courier">
@@ -39,13 +42,17 @@ const Courier = () =>{
                 <label className="label" htmlfor="PriorSalary">PriorSalary</label>
                 <input className="input" name="PriorSalary" onChange={changeHandler}></input>
             </div>
-
+            {   userInfo.accessLevel >= table.requiredRights &&
             <div className="block block__button">
                 <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
                 <button className="button button__cancel">Отмена</button>
             </div>
+            }
         </div>
     );
 }
+const mapStateToProps= (state) => ({
+    userInfo: state.userInfo // undefined
+})
 
-export default Courier;
+export default connect(mapStateToProps, null)(Courier);
