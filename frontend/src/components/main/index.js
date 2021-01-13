@@ -4,13 +4,20 @@ import { connect } from 'react-redux';
 import {setItem} from '../../redux/actionCreators';
 import './index.scss';
 
-const Main = ({ selectedTable, data, setItem }) => {
-    if (selectedTable === 'About') {
-        return (
+const Main = ({ selectedTable, data, setItem, userInfo }) => {
+    if (selectedTable === 'About' ) {
+        if (!userInfo.token) {
+            return (
+                <main className="main">
+                    <h2>You must be signed to use our application</h2>
+                </main>
+            );
+        }
+        else return (
             <main className="main">
-                <h2>About Us</h2>
+                <h2>Your data will be displayed here</h2>
             </main>
-        )
+        );
     }
     const availableFields = tablePrefabs[selectedTable].fields;
     return (
@@ -40,7 +47,8 @@ const Main = ({ selectedTable, data, setItem }) => {
 
 const mapStateToProps = (state) => {
     return {
-        selectedTable: state.option, data: state.data
+        selectedTable: state.option, data: state.data,
+        userInfo: state.userInfo
     }
 }
 

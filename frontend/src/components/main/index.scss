@@ -4,6 +4,10 @@
     width: 75%;
     display: flex;
     justify-content: center;
+
+    h2 {
+        color: $primary-white;
+    }
 }
 .table {
     margin: 20px 0;

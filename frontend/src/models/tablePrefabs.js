@@ -51,8 +51,8 @@ export const tablePrefabs = {
         name: 'Product',
         fields: [
             'id',
+            'Description',
             'Name',
-            'Descriprion',
         ],
         requiredRights: {
             read: accessLevels['read-only'],
