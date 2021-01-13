@@ -4,7 +4,7 @@ import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
-const Customers = ({ userInfo }) =>{
+const Customers = ({ userInfo, selectedItem }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         FName: '',
@@ -15,44 +15,47 @@ const Customers = ({ userInfo }) =>{
         Phone: '',
         DateInSystem: new Date()
     });
+    if (selectedItem && selectedItem.id !== inputValue.id) {
+        setInputValue(selectedItem);
+    }
     const table = tablePrefabs.Customer;
     const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
     console.warn({userInfo});
     return (
-        <div className="customers">
-            <label className="formName">Customers</label>
+        <div className="customer">
+            <label className="formName">Customer</label>
             <div className="block">
                 <label className="label" htmlFor="id">ID</label>
-                <input disabled className="input" name="id" />
+                <input disabled className="input" name="id" value={inputValue.id} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="FName">FName</label>
-                <input onChange={changeHandler} className="input" name="FName" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="FName" disabled={!canWrite} value={inputValue.FName} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="MName">MName</label>
-                <input onChange={changeHandler} className="input" name="MName" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="MName" disabled={!canWrite} value={inputValue.MName} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="LName">LName</label>
-                <input onChange={changeHandler} className="input" name="LName" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="LName" disabled={!canWrite} value={inputValue.LName} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="Address">Address</label>
-                <input onChange={changeHandler} className="input" name="Address" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="Address" disabled={!canWrite} value={inputValue.Address} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="City">City</label>
-                <input onChange={changeHandler} className="input" name="City" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="City" disabled={!canWrite} value={inputValue.City} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="Phone">Phone</label>
-                <input onChange={changeHandler} className="input" name="Phone" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="Phone" disabled={!canWrite} value={inputValue.Phone} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="DateInSystem">DateInSystem</label>
-                <input type="date" disabled onChange={changeHandler} className="input" name="DateInSystem" />
+                <input type="date" disabled onChange={changeHandler} className="input" name="DateInSystem" value={inputValue.DateInSystem} />
             </div>
             {  canWrite &&
             <div className="block block__button">
@@ -64,7 +67,8 @@ const Customers = ({ userInfo }) =>{
     );
 }
 const mapStateToProps= (state) => ({
-    userInfo: state.userInfo // undefined
+    userInfo: state.userInfo,
+    selectedItem: state.selectedItem,
 })
 
 

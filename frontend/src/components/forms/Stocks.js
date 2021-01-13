@@ -4,12 +4,15 @@ import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
-const Stocks = ({ userInfo }) =>{
+const Stocks = ({ userInfo, selectedItem }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         ProductID: 0,
         Qty: 0
     });
+    if (selectedItem && selectedItem.id !== inputValue.id) {
+        setInputValue(selectedItem);
+    }
     const table = tablePrefabs.Stocks;
     const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
@@ -18,15 +21,15 @@ const Stocks = ({ userInfo }) =>{
             <label className="formName">Stocks</label>
             <div className="block">
                 <label className="label" htmlFor="id">ID</label>
-                <input disabled className="input" name="id" />
+                <input disabled className="input" name="id" value={inputValue.id} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="ProductID">ProductID</label>
-                <input onChange={changeHandler} className="input" name="ProductID" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="ProductID" disabled={!canWrite} value={inputValue.ProductID} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="Qty">Qty</label>
-                <input onChange={changeHandler} className="input" name="Qty" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" name="Qty" disabled={!canWrite} value={inputValue.Qty} />
             </div>
             { canWrite &&
             <div className="block block__button">
@@ -38,7 +41,8 @@ const Stocks = ({ userInfo }) =>{
     );
 }
 const mapStateToProps= (state) => ({
-    userInfo: state.userInfo // undefined
+    userInfo: state.userInfo,
+    selectedItem: state.selectedItem,
 })
 
 

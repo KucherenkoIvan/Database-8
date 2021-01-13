@@ -5,7 +5,7 @@ import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
 
-const CourierInfo = ({ userInfo, selectedItem  }) =>{
+const CourierInfo = ({ userInfo, selectedItem }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         CourierID: 0,
