@@ -20,3 +20,6 @@ export const APPEND_NOTIFICATION = 'APPEND_NOTIFICATION';
 export const POP_NOTIFICATION = 'POP_NOTIFICATION';
 export const SET_NOTIFICATION_DATA = 'SET_NOTIFICATION_DATA';
 export const SET_SHOWING_STATE = 'SET_SHOWING_STATE';
+
+// @example_reducer01
+// Собсна, тут константы с типами действий. Ничего особенно интересного
