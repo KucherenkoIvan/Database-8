@@ -1,4 +1,4 @@
-import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM} from './actions';
+import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM, APPEND_NOTIFICATION, POP_NOTIFICATION, SET_NOTIFICATION_DATA, SET_SHOWING_STATE} from './actions';
 
 export function setOption(payload) {
     return dispatch => {
@@ -30,7 +30,7 @@ export function login(payload) {
         try {
             const {login, password} = payload;
             const serverResponse = await fetch(
-                '/api/auth/login', 
+                '/api/auth/login',
                 {
                     method: 'POST',
                     headers: {
@@ -57,4 +57,45 @@ export function logout() {
         dispatch({ type: SET_OPTION, payload: 'About' });
         dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'non-authorized' } })
     } 
+}
+
+export function createRow(payload) {
+    return async dispatch => {
+        try {
+            const {modelName, modelData} = payload;
+            const serverResponse = await fetch(
+                `/api/model/${modelName}`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({modelData})
+                });
+            const dataObject = await serverResponse.json();
+    
+            if (dataObject.error) {
+                // dispatch error
+            }
+        }
+        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Никто:\nАбсолютно никто:\nСервер: Я упал((9(9(("} }) }
+    }
+}
+
+export function appendNotification(payload) {
+    return dispatch => dispatch({type: APPEND_NOTIFICATION, payload});
+}
+
+export function popNotification(timeout) {
+    return dispatch => {
+        setTimeout(() => dispatch({type: POP_NOTIFICATION}), timeout);
+    }
+}
+
+export function setNotificationData(payload) {
+    return dispatch => dispatch({type: SET_NOTIFICATION_DATA, payload});
+}
+
+export function setShowingState(payload) {
+    return dispatch => dispatch({type: SET_SHOWING_STATE, payload});
 }

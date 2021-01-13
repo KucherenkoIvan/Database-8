@@ -4,6 +4,7 @@ import Header from '../src/components/header/index'
 import Aside from './components/aside';
 import Body from './components/body/body';
 import Main from './components/main';
+import NotificationController from './components/notifcation';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Aside />
         <Main />
       </Body>
+      <NotificationController />
     </>
   );
 }

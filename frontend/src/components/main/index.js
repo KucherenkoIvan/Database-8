@@ -1,15 +1,16 @@
 import React from 'react';
 import { tablePrefabs } from '../../models/tablePrefabs';
 import { connect } from 'react-redux';
-import {setItem} from '../../redux/actionCreators';
+import {setItem, appendNotification} from '../../redux/actionCreators';
 import './index.scss';
 
-const Main = ({ selectedTable, data, setItem, userInfo }) => {
+const Main = ({ selectedTable, data, setItem, userInfo, appendNotification }) => {
     if (selectedTable === 'About' ) {
         if (!userInfo.token) {
             return (
                 <main className="main">
                     <h2>You must be signed to use our application</h2>
+                    <button onClick={() => {for(let i = 0; i < 3; i++) appendNotification({title: i, content: 'some big long text that you should read'})}}>test notification</button>
                 </main>
             );
         }
@@ -54,6 +55,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     setItem,
+    appendNotification,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
