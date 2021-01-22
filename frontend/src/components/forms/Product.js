@@ -6,11 +6,12 @@ import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
 const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
-    const [inputValue, setInputValue] = useState({
+    const defaultValue = {
         id: 0,
         Name : '',
         Description : ''
-    });
+    };
+    const [inputValue, setInputValue] = useState(defaultValue);
     if (selectedItem && selectedItem.id !== inputValue.id) {
         setInputValue(selectedItem);
     }
@@ -24,7 +25,7 @@ const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
             createRow({ modelData: inputValue, modelName: 'Product' });
         }
     };
-    const cancelClickHandler = () => {
+    const cancelClickHandler = () => {  
         setItem(null);
     };
     return (
