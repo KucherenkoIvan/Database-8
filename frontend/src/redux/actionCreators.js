@@ -96,10 +96,13 @@ export function createRow(payload) {
             const dataObject = await serverResponse.json();
     
             if (dataObject.error) {
-                // dispatch error
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Ошибка', content: dataObject.error.msg, type: 'ERROR' } });
+            } else {
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Добавлено', content: 'В базу данных добавлена 1 строка', type: 'SUCCESS' } });
+                loadData(payload.modelName)(dispatch);
             }
         }
-        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер недоступен"} }) }
+        catch (e) {dispatch({ type: APPEND_NOTIFICATION, payload:  { title: 'Ошибка', content: e.message, type: 'ERROR' } }) }
     }
 }
 

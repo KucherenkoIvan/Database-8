@@ -31,6 +31,7 @@ app.use(require('./server-routes/placeholder.route.js'));
     success('Connection established');
   } catch (e) {
     error('Connection failed');
+    console.log(e);
     process.exit(-1);
   }
 })().then( () => {

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { accessLevels } from "../../models/accessLevels";
+import { createRow, setItem } from '../../redux/actionCreators'
 import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
 
-const Product = ({ userInfo }) =>{
+const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
     const [inputValue, setInputValue] = useState({
         id: 0,
         Name : '',
@@ -12,7 +13,17 @@ const Product = ({ userInfo }) =>{
     });
     const table = tablePrefabs.Product;
     const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
-    const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});}; 
+    const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});};
+    const saveClickHandler = () => {
+        if (selectedItem) {
+            // update row
+        } else {
+            createRow({ modelData: inputValue, modelName: 'Product' });
+        }
+    };
+    const cancelClickHandler = () => {
+        setItem(null);
+    };
     return (
         <div className="product">
             <label className="formName">Product</label>
@@ -30,15 +41,21 @@ const Product = ({ userInfo }) =>{
             </div>
             { canWrite &&
             <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                <button className="button button__cancel">Отмена</button>
+                <button onClick={saveClickHandler} className="button button__save">Сохранить</button>
+                <button className="button button__cancel" onClick={cancelClickHandler}>Отмена</button>
             </div>
             }
         </div>
     );
 }
 const mapStateToProps= (state) => ({
-    userInfo: state.userInfo // undefined
+    userInfo: state.userInfo,
+    selectedItem: state.selectedItem,
 })
 
-export default connect(mapStateToProps, null)(Product);
+const mapDispatchToProps = {
+    createRow,
+    setItem,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -32,6 +32,7 @@ router.get('/:modelName', async (req, res) => {
 
 router.post('/:modelName', async (req, res) => {
     const {modelData} = req.body;    
+    delete modelData.id;
     const {modelName} = req.params;
 
     if (!models[modelName]) {
