@@ -13,14 +13,19 @@
 .notification-container {
     position: fixed; // Фиксируем уведомление на экране, чтобы оно не убегало при скролле
     z-index: 900; // Перемещаем на верхний слой
+    border-radius: 10px;
+
+    left: 20px;
     
-    left: 20px; 
-    top: calc(100vh - 150px); // Задаем положение
+    width: 280px;
     
-    height: 150px;
-    width: 300px; // И размер (Будешь менять высоту, не забудь про top - она участвует в рассчете)
+    display: flex;
+    flex-direction: column;
+
+    height: 120px; // Задаем размер (Будешь менять высоту, не забудь про top - она участвует в рассчете)
 
     animation: apear 0.5s ease 1 forwards; // Плавное появление
+    padding: 20px;
 }
 
 // @tip_styles02
@@ -28,7 +33,22 @@
 // Для начала можно сделать 3 типа уведомлений:
 // error - красненькая залупка для ошибок
 // regular - для всякой бесполезной текстовой шелухи, беленький либо в цветах темы (лучше беленький)
-// success - зелененький блок для сообщений "успешно добавлено" и т.д. 
+// success - зелененький блок для сообщений "успешно добавлено" и т.д.
+
+.notification__default {
+    color: #101010;
+    background-color: lightgray;
+}
+
+.notification__error {
+    background-color: pink;
+    color: crimson;
+}
+
+.notification__success {
+    background-color: #c1ffc1;
+    color: #237423;
+}
 
 .notification-container:hover {
     opacity: 1; // от пизды накида, тут придумаешь что-то
@@ -40,9 +60,11 @@
 @keyframes apear {
     from {
         opacity: 0;
+        top: 100vh;
     }
     to {
         opacity: 1;
+        top: calc(100vh - 180px);
     }
 }
 

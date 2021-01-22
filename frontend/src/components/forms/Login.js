@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {connect} from 'react-redux';
-import {login} from '../../redux/actionCreators';
+import {login, appendNotification} from '../../redux/actionCreators';
 
-const Login = ({ login, userInfo }) =>{
+const Login = ({ login, userInfo, appendNotification }) =>{
     const [inputValue, setInputValue] = useState({
         login: '',
         password: ''
     });
+    useEffect(
+        () => {        
+            if (userInfo?.errorMessage) {
+                console.log('test')
+                appendNotification({
+                    type: 'ERROR',
+                    title: 'Ошибка авторизации',
+                    content: userInfo.errorMessage,
+                });
+            }
+        },
+        [userInfo?.errorMessage]
+    )
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});};
     if (!userInfo.token) {
         return (
@@ -23,9 +36,6 @@ const Login = ({ login, userInfo }) =>{
                 <div className="block block__button">
                     <button onClick={() => {login(inputValue); console.log(inputValue)}} className="button button__save">Войти</button>
                 </div>
-                { userInfo.authorizationStatus === 'error' &&
-                    <div className="error">{userInfo.errorMessage.split('\n').map(line => <>{line}<br/></>)}</div>
-                }
             </div>
         );
     }
@@ -39,7 +49,8 @@ const Login = ({ login, userInfo }) =>{
 }
 
 const mapDispatchToProps = {
-    login
+    login,
+    appendNotification,
 };
 
 const mapStateToProps = state => {

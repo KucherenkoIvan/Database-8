@@ -10,18 +10,6 @@ const Main = ({ selectedTable, data, setItem, userInfo, appendNotification }) =>
             return (
                 <main className="main">
                     <h2>You must be signed to use our application</h2>
-                    <button onClick={() => {
-                        for(let i = 0; i < 3; i++) {                 
-                            appendNotification(  // Вот эта залупень делает нам уведомления на экран 
-                                {                                
-                                    title: i, // це заголовок - должна быть строка, но я передаю число - потому что могу, хуле мне
-                                    content: 'some big long text that you should read' // это текст уведомления
-                                //  type: error - Поддержку такой фичи можешь организовать
-                                })
-                        }
-                    }}>
-                        test notification
-                        </button>
                 </main>
             );
         }

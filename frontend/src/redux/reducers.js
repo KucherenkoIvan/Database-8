@@ -34,7 +34,7 @@
 // [Его работу можно симитировать используя паттерн observer - почитай, полезная штука [да, я выебываюсь, и что?]]
 
 import {combineReducers} from 'redux';
-import {APPEND_NOTIFICATION, POP_NOTIFICATION, SET_AUTH_DATA, SET_DATA, SET_ITEM, SET_NOTIFICATION_DATA, SET_OPTION, SET_SHOWING_STATE, TOGGLE_NOTIFICATION_STATUS} from './actions';
+import {APPEND_NOTIFICATION, POP_NOTIFICATION, SET_AUTH_DATA, SET_DATA, SET_ITEM, SET_NOTIFICATION_DATA, SET_OPTION, RESET_ACTIVE_NOTIFICATION, NOTIFICATION_TEST} from './actions';
 
 const optionReducer = (state = 'About', action) => {
     switch (action.type) {
@@ -77,7 +77,7 @@ const itemReducer = (state = null, action) => {
     }
 }
 
-const notificationReducer = (state = { queue: [], wpm: 120, isShowing: false, activeNotification: null}, action) => {
+const notificationReducer = (state = { queue: [], wpm: 120, activeNotification: null}, action) => {
     switch (action.type) {
         case APPEND_NOTIFICATION: {
             const queue = [...state.queue];
@@ -90,7 +90,29 @@ const notificationReducer = (state = { queue: [], wpm: 120, isShowing: false, ac
             return {...state, queue, activeNotification};
         }
         case SET_NOTIFICATION_DATA: return {...state, ...action.payload};
-        case SET_SHOWING_STATE: return {...state, isShowing: action.payload}
+        case RESET_ACTIVE_NOTIFICATION: return {...state, activeNotification: null};
+        case NOTIFICATION_TEST: {
+            const prefabs = [
+                {
+                    title: 'Error!',  // це заголовок - должна быть строка, но можно и число - хуле нам
+                    type: 'ERROR',
+                    content: 'An error occured during the action!' // это текст уведомления
+                },
+                {
+                    title: 'Standard',
+                    content: 'Standard notification'
+                },
+                {
+                    title: 'Success!',
+                    type: 'SUCCESS',
+                    content: 'Action completed successfuly'
+                }
+            ];
+            return {
+                ...state,
+                queue: prefabs,
+            };
+        };
         default: return state;
     }
 }

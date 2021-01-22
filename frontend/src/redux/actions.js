@@ -19,7 +19,8 @@ export const DELETE_ROW = 'DELETE_ROW';
 export const APPEND_NOTIFICATION = 'APPEND_NOTIFICATION';
 export const POP_NOTIFICATION = 'POP_NOTIFICATION';
 export const SET_NOTIFICATION_DATA = 'SET_NOTIFICATION_DATA';
-export const SET_SHOWING_STATE = 'SET_SHOWING_STATE';
+export const RESET_ACTIVE_NOTIFICATION = 'RESET_ACTIVE_NOTIFICATION';
+export const NOTIFICATION_TEST = 'NOTIFICATION_TEST';
 
 // @example_reducer01
 // Собсна, тут константы с типами действий. Ничего особенно интересного

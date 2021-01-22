@@ -9,6 +9,7 @@ import Product from "../forms/Product";
 import Stocks from "../forms/Stocks";
 import User from "../forms/User";
 import { connect } from 'react-redux';
+import NotificationController from '../notification';
 import './index.scss';
 
 const Aside = ({ selectedTable }) =>{
@@ -29,6 +30,7 @@ const Aside = ({ selectedTable }) =>{
     return (
         <aside className="aside">
             { form }
+            <NotificationController />
         </aside>
     );
 }

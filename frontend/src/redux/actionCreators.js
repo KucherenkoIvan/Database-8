@@ -1,4 +1,4 @@
-import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM, APPEND_NOTIFICATION, POP_NOTIFICATION, SET_NOTIFICATION_DATA, SET_SHOWING_STATE} from './actions';
+import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM, APPEND_NOTIFICATION, POP_NOTIFICATION, SET_NOTIFICATION_DATA, RESET_ACTIVE_NOTIFICATION} from './actions';
 
 export function setOption(payload) {
     return dispatch => {
@@ -65,7 +65,7 @@ export function login(payload) {
             console.log(token, userID, accessLevel)
             dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } }) // А вот тут мы определяем действия при успешной авторизации
         }
-        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Никто:\nАбсолютно никто:\nСервер: Я упал((9(9(("} }) } // ))0)0))0))0))0))
+        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер недоступен"} }) } // ))0)0))0))0))0))
     }
 }
 // Так вот, функции вроде той, что описана выше называются action creators. Да, потому что они нужны для создания объектов action
@@ -99,7 +99,7 @@ export function createRow(payload) {
                 // dispatch error
             }
         }
-        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Никто:\nАбсолютно никто:\nСервер: Я упал((9(9(("} }) }
+        catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер недоступен"} }) }
     }
 }
 
@@ -117,6 +117,9 @@ export function setNotificationData(payload) {
     return dispatch => dispatch({type: SET_NOTIFICATION_DATA, payload});
 }
 
-export function setShowingState(payload) {
-    return dispatch => dispatch({type: SET_SHOWING_STATE, payload});
+export function resetActiveNotification(timeout) {
+    console.log({timeout});
+    return dispatch => {
+        setTimeout(() => dispatch({type: RESET_ACTIVE_NOTIFICATION}), timeout);
+    }
 }
