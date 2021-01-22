@@ -22,7 +22,7 @@ export const tablePrefabs = {
         name: 'Courier',
         fields: [
             'id',
-            'FMame',
+            'FName',
             'MName',
             'LName',
             'Salary',
@@ -37,8 +37,8 @@ export const tablePrefabs = {
         name: 'CourierInfo',
         fields: [
             'id',
-            'CourierID',
             'BirthDate',
+            'CourierID',
             'Address',
             'Phone',
         ],
@@ -52,7 +52,7 @@ export const tablePrefabs = {
         fields: [
             'id',
             'Name',
-            'Descriprion',
+            'Description',
         ],
         requiredRights: {
             read: accessLevels['read-only'],
