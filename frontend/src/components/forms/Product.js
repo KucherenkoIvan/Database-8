@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { accessLevels } from "../../models/accessLevels";
-import { createRow, setItem } from '../../redux/actionCreators'
 import { tablePrefabs } from "../../models/tablePrefabs";
 import '../forms/style.scss';
+import { useDataActions } from "../hooks/dataActions.hook";
 
-const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
+const Product = ({ userInfo, selectedItem }) =>{
+
+    const { cancelClickHandler, saveClickHandler, deleteClickHandler }= useDataActions();
+
     const defaultValue = {
         id: 0,
         Name : '',
@@ -18,16 +21,6 @@ const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
     const table = tablePrefabs.Product;
     const canWrite = accessLevels[userInfo.accessLevel] >= table.requiredRights.write;
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});};
-    const saveClickHandler = () => {
-        if (selectedItem) {
-            // update row
-        } else {
-            createRow({ modelData: inputValue, modelName: 'Product' });
-        }
-    };
-    const cancelClickHandler = () => {  
-        setItem(null);
-    };
     return (
         <div className="product">
             <label className="formName">Product</label>
@@ -45,8 +38,9 @@ const Product = ({ userInfo, createRow, selectedItem, setItem }) =>{
             </div>
             { canWrite &&
             <div className="block block__button">
-                <button onClick={saveClickHandler} className="button button__save">Сохранить</button>
-                <button className="button button__cancel" onClick={cancelClickHandler}>Отмена</button>
+                <button onClick={() => {saveClickHandler(inputValue)}} className="button button__save">Сохранить</button>
+                {selectedItem && (<button onClick={() => {deleteClickHandler(setInputValue, defaultValue)}} className="button button__save">Удалить</button>)}
+                <button className="button button__cancel" onClick={() => {cancelClickHandler(setInputValue, defaultValue)}}>Отмена</button>
             </div>
             }
         </div>
@@ -58,8 +52,7 @@ const mapStateToProps= (state) => ({
 })
 
 const mapDispatchToProps = {
-    createRow,
-    setItem,
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

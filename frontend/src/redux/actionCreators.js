@@ -1,4 +1,5 @@
 import {SET_OPTION, SET_DATA, SET_AUTH_DATA, SET_ITEM, APPEND_NOTIFICATION, POP_NOTIFICATION, SET_NOTIFICATION_DATA, RESET_ACTIVE_NOTIFICATION} from './actions';
+import jwt from 'jsonwebtoken';
 
 export function setOption(payload) {
     return dispatch => {
@@ -22,6 +23,23 @@ export function loadData(payload) {
         console.log(rows)
         dispatch({ type: SET_DATA, payload: { model: payload, rows}})
     } 
+}
+
+export function checkSavedAuth() {
+    return async dispatch => {
+        const savedAuth = JSON.parse(window.localStorage.getItem('authentication'));
+        if (savedAuth) {
+            try {
+                if (jwt.verify(savedAuth.token, 'strong secret')) {
+                    dispatch({ type: SET_AUTH_DATA, payload: { ...savedAuth, authorizationStatus: 'signed' } })
+                }
+            }
+            catch(e) {
+                console.warn('Authorization token expired');
+                window.localStorage.removeItem('authentication');
+            }
+        }
+    }
 }
 
 // @example_reducer02
@@ -63,7 +81,8 @@ export function login(payload) {
                 return dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: error.msg} })
             }
             console.log(token, userID, accessLevel)
-            dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } }) // А вот тут мы определяем действия при успешной авторизации
+            window.localStorage.setItem('authentication', JSON.stringify({token, userID, accessLevel, login}));
+            dispatch({ type: SET_AUTH_DATA, payload: { token, userID, accessLevel, login, authorizationStatus: 'signed' } }); // А вот тут мы определяем действия при успешной авторизации
         }
         catch (e) {dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'error', errorMessage: "Сервер недоступен"} }) } // ))0)0))0))0))0))
     }
@@ -75,7 +94,8 @@ export function login(payload) {
 export function logout() {
     return async dispatch => {
         dispatch({ type: SET_OPTION, payload: 'About' });
-        dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'non-authorized' } })
+        dispatch({ type: SET_AUTH_DATA, payload: { authorizationStatus: 'non-authorized' } });
+        window.localStorage.removeItem('authentication');
     } 
 }
 
@@ -83,7 +103,7 @@ export function logout() {
 export function createRow(payload) {
     return async dispatch => {
         try {
-            const {modelName, modelData} = payload;
+            const {modelName, modelData, user} = payload;
             const serverResponse = await fetch(
                 `/api/model/${modelName}`, 
                 {
@@ -91,7 +111,7 @@ export function createRow(payload) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({modelData})
+                    body: JSON.stringify({modelData, user})
                 });
             const dataObject = await serverResponse.json();
     
@@ -99,6 +119,58 @@ export function createRow(payload) {
                 dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Ошибка', content: dataObject.error.msg, type: 'ERROR' } });
             } else {
                 dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Добавлено', content: 'В базу данных добавлена 1 строка', type: 'SUCCESS' } });
+                loadData(payload.modelName)(dispatch);
+            }
+        }
+        catch (e) {dispatch({ type: APPEND_NOTIFICATION, payload:  { title: 'Ошибка', content: e.message, type: 'ERROR' } }) }
+    }
+}
+
+export function editRow(payload) {
+    return async dispatch => {
+        try {
+            const {modelName, modelData, user} = payload;
+            const serverResponse = await fetch(
+                `/api/model/${modelName}`, 
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({modelData, user})
+                });
+            const dataObject = await serverResponse.json();
+
+            if (dataObject.error) {
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Ошибка', content: dataObject.error.msg, type: 'ERROR' } });
+            } else {
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Сохранено', content: 'Затронута 1 строка', type: 'SUCCESS' } });
+                loadData(payload.modelName)(dispatch);
+            }
+        }
+        catch (e) {dispatch({ type: APPEND_NOTIFICATION, payload:  { title: 'Ошибка', content: e.message, type: 'ERROR' } }) }
+    }
+}
+
+export function deleteRow(payload) {
+    return async dispatch => {
+        try {
+            const {modelName, id, user} = payload;
+            const serverResponse = await fetch(
+                `/api/model/delete/${modelName}`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({id, user})
+                });
+            const dataObject = await serverResponse.json();
+
+            if (dataObject.error) {
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Ошибка', content: dataObject.error.msg, type: 'ERROR' } });
+            } else {
+                dispatch({ type: APPEND_NOTIFICATION, payload: { title: 'Удалено', content: 'Затронута 1 строка', type: 'SUCCESS' } });
                 loadData(payload.modelName)(dispatch);
             }
         }

@@ -50,6 +50,13 @@
     color: #237423;
 }
 
+.notification__gay {
+    color: black;
+    text-shadow: 0px 0px 10px white;
+    box-shadow: 0px 0px 25px gold;
+    background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+}
+
 .notification-container:hover {
     opacity: 1; // от пизды накида, тут придумаешь что-то
 }

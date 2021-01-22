@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
+import { useDataActions } from "../hooks/dataActions.hook";
 import '../forms/style.scss';
 
 const User = ({ userInfo, selectedItem }) =>{
-    const [inputValue, setInputValue] = useState({
+    const { cancelClickHandler, saveClickHandler, deleteClickHandler }= useDataActions();
+    const defaultValue = {
         id: 0,
         login: '',
         password: '',
-        accessLevel: ''
-    });
+        accessLevel: 'read-only'
+    };
+    const [inputValue, setInputValue] = useState(defaultValue);
 
     if (selectedItem && selectedItem.id !== inputValue.id) {
         setInputValue(selectedItem);
@@ -45,8 +48,9 @@ const User = ({ userInfo, selectedItem }) =>{
             </div>
             { canWrite &&
             <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                <button className="button button__cancel">Отмена</button>
+                {!selectedItem && (<button onClick={() => {saveClickHandler(inputValue)}} className="button button__save">Сохранить</button>)}
+                {selectedItem && (<button onClick={() => {deleteClickHandler(setInputValue, defaultValue)}} className="button button__save">Удалить</button>)}
+                <button className="button button__cancel" onClick={() => {cancelClickHandler(setInputValue, defaultValue)}}>Отмена</button>
             </div>
             }
         </div>

@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
+import { useDataActions } from '../hooks/dataActions.hook';
 import '../forms/style.scss';
 
 const Customers = ({ userInfo, selectedItem }) =>{
-    const [inputValue, setInputValue] = useState({
+    const { cancelClickHandler, saveClickHandler, deleteClickHandler }= useDataActions();
+
+    const defaultValue = {
         id: 0,
         FName: '',
         MName: '',
@@ -14,7 +17,9 @@ const Customers = ({ userInfo, selectedItem }) =>{
         City: '',
         Phone: '',
         DateInSystem: new Date()
-    });
+    };
+
+    const [inputValue, setInputValue] = useState(defaultValue);
     if (selectedItem && selectedItem.id !== inputValue.id) {
         setInputValue(selectedItem);
     }
@@ -57,10 +62,11 @@ const Customers = ({ userInfo, selectedItem }) =>{
                 <label className="label" htmlFor="DateInSystem">DateInSystem</label>
                 <input type="date" disabled onChange={changeHandler} className="input" name="DateInSystem" value={inputValue.DateInSystem} />
             </div>
-            {  canWrite &&
+            { canWrite &&
             <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                <button className="button button__cancel">Отмена</button>
+                <button onClick={() => {saveClickHandler(inputValue)}} className="button button__save">Сохранить</button>
+                {selectedItem && (<button onClick={() => {deleteClickHandler(setInputValue, defaultValue)}} className="button button__save">Удалить</button>)}
+                <button className="button button__cancel" onClick={() => {cancelClickHandler(setInputValue, defaultValue)}}>Отмена</button>
             </div>
             }
         </div>

@@ -62,7 +62,9 @@ router.post('/login', async (req, res) => {
 // /api/auth
 router.post('/register', async (req, res) => {
     try {
-
+        if (req.body.modelData) {
+            req.body = req.body.modelData
+        }
 
         if (!req.body || !req.body.login || !req.body.password) {
             console.log('Введите логин и пароль')

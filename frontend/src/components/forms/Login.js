@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {connect} from 'react-redux';
-import {login, appendNotification} from '../../redux/actionCreators';
+import {login, appendNotification, checkSavedAuth} from '../../redux/actionCreators';
 
-const Login = ({ login, userInfo, appendNotification }) =>{
+const Login = ({ login, userInfo, appendNotification, checkSavedAuth }) =>{
     const [inputValue, setInputValue] = useState({
         login: '',
         password: ''
@@ -20,6 +20,9 @@ const Login = ({ login, userInfo, appendNotification }) =>{
         },
         [userInfo?.errorMessage]
     )
+    useEffect(() => {
+        checkSavedAuth();
+    }, [])
     const changeHandler = (event) => {setInputValue({...inputValue, [event.target.name]: event.target.value});};
     if (!userInfo.token) {
         return (
@@ -51,6 +54,7 @@ const Login = ({ login, userInfo, appendNotification }) =>{
 const mapDispatchToProps = {
     login,
     appendNotification,
+    checkSavedAuth,
 };
 
 const mapStateToProps = state => {

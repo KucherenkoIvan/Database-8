@@ -94,18 +94,23 @@ const notificationReducer = (state = { queue: [], wpm: 120, activeNotification: 
         case NOTIFICATION_TEST: {
             const prefabs = [
                 {
-                    title: 'Error!',  // це заголовок - должна быть строка, но можно и число - хуле нам
-                    type: 'ERROR',
-                    content: 'An error occured during the action!' // это текст уведомления
+                    title: 'Gay detected!', // це заголовок - должна быть строка, но можно и число - хуле нам
+                    content: 'The probability that you are gay is about 78%', // это текст уведомления
+                    type: 'error'
                 },
                 {
-                    title: 'Standard',
-                    content: 'Standard notification'
+                    title: 'Gay detected!',
+                    content: 'The probability that you are gay is about 78%'
                 },
                 {
-                    title: 'Success!',
-                    type: 'SUCCESS',
-                    content: 'Action completed successfuly'
+                    title: 'Gay detected!',
+                    type: 'success',
+                    content: 'The probability that you are gay is about 78%'
+                },
+                {
+                    title: 'Gay detected!',
+                    type: 'gay',
+                    content: 'The probability that you are gay is about 78%'
                 }
             ];
             return {

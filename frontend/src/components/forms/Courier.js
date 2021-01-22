@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { accessLevels } from "../../models/accessLevels";
 import { tablePrefabs } from "../../models/tablePrefabs";
+import { useDataActions } from '../hooks/dataActions.hook';
 import '../forms/style.scss';
 
 
 const Courier = ({ userInfo, selectedItem }) =>{
-    const [inputValue, setInputValue] = useState({
+
+    const { cancelClickHandler, saveClickHandler, deleteClickHandler }= useDataActions();
+
+    const defaultValue = {
         id: 0,
         FName: '',
         MName: '',
         LName: '',
         Salary: 0,
         PriorSalary: 0
-    });
+    };
+    const [inputValue, setInputValue] = useState(defaultValue);
 
     if (selectedItem && selectedItem.id !== inputValue.id) {
         setInputValue(selectedItem);
@@ -49,10 +54,11 @@ const Courier = ({ userInfo, selectedItem }) =>{
                 <label className="label" htmlFor="PriorSalary">PriorSalary</label>
                 <input className="input" name="PriorSalary" onChange={changeHandler} disabled={!canWrite} value={inputValue.PriorSalary}></input>
             </div>
-            {  canWrite &&
+            { canWrite &&
             <div className="block block__button">
-                <button onClick={() => {console.log(inputValue)}} className="button button__save">Сохранить</button>
-                <button className="button button__cancel">Отмена</button>
+                <button onClick={() => {saveClickHandler(inputValue)}} className="button button__save">Сохранить</button>
+                {selectedItem && (<button onClick={() => {deleteClickHandler(setInputValue, defaultValue)}} className="button button__save">Удалить</button>)}
+                <button className="button button__cancel" onClick={() => {cancelClickHandler(setInputValue, defaultValue)}}>Отмена</button>
             </div>
             }
         </div>

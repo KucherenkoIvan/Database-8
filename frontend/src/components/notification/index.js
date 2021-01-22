@@ -4,7 +4,7 @@ import {popNotification, resetActiveNotification} from '../../redux/actionCreato
 import s from './index.scss';
 
 const NotificationController = ({msg, queue, popNotification, resetActiveNotification, wpm, isShowing}) => {
-    const msgClass = msg?.type ? msg?.type === 'ERROR' ? 'notification__error' : 'notification__success' : 'notification__default';
+    const msgClass = 'notification__'+ (msg?.type?.toLowerCase() || 'default');
     useEffect(() => {
         if (!msg)
         {
