@@ -8,9 +8,13 @@ router.get('/api/sql/:sql', async (req, res) => {
     console.log(req.params);
     try {
         const result = await sequelize.query(queryString)
-        res.json(result[0]);
+        res.json({rows: result[0]});
     } catch (e) {
-        res.json(e.message);
+        return res.status(500).json({
+            error: {
+                msg: e.message
+            }
+        })
     }
 });
 

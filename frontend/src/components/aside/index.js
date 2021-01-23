@@ -11,6 +11,7 @@ import User from "../forms/User";
 import { connect } from 'react-redux';
 import NotificationController from '../notification';
 import './index.scss';
+import SqlTool from "../forms/SqlTool";
 
 const Aside = ({ selectedTable }) =>{
 
@@ -25,6 +26,7 @@ const Aside = ({ selectedTable }) =>{
         case 'OrderDetails': form = (<OrderDetails/>); break;
         case 'CourierInfo': form = (<CourierInfo/>); break;
         case 'About': form = (<Login/>); break;
+        case 'Sql': form = (<SqlTool/>); break;
         default: break;
     }
     return (

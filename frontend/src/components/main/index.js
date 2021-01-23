@@ -31,12 +31,20 @@ const Main = ({ selectedTable, data, setItem, userInfo, appendNotification }) =>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.model === selectedTable &&
-                        data.rows.map(row => 
+                    {data.model === selectedTable && data.model !== 'Sql' && 
+                        data?.rows?.map?.(row => 
                             (<tr key={row.id} id={row.id} onClick={(event) => setItem(data.rows.find(rw => rw.id === Number(event.target.id)))}>{Object.keys(row).map(
-                                key => availableFields.includes(key) && (<td key={key} id={row.id}>{row[key]}</td>)
-                                )}
+                                key => availableFields.includes(key) && (<td key={key} id={row.id}>{row[key] ? row[key] : JSON.stringify(row)}</td>)
+                            )}
                             </tr>)
+                        )
+                    }
+                    {data.model === 'Sql' &&
+                        data?.rows?.map?.((row, index) => 
+                            (<tr key={index}>
+                                <td key={index}>{JSON.stringify(row)}</td>
+                            </tr>
+                            )
                         )
                     }
                 </tbody>

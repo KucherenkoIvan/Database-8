@@ -5,12 +5,7 @@ import './index.scss';
 import { tablePrefabs } from '../../models/tablePrefabs';
 import { accessLevels } from "../../models/accessLevels";
 
-// @tip_redux03_01
-// Внимательно посмотри в пропсы компонента. Тут мы принимаем всё, что передавали в map-методах. Если не принять - работать не будет [(c) Ислам]
-const Header = ({ setOption, userInfo, logout, setItem }) =>{ // В нашем случае userInfo - объект из состояния (если оно поменяется, то и тут поменяется и компонент перерендерится),
-                                                     // а setOption и logout - dispatch-функции для изменения состояния. Говорят, чтобы функции работали, их нужно вызывать
-    // Вот и всё. В принципе, ты это уже делал, так что разберешься
-    // [ты пришел из @tip_redux03 в reducers.js или в index.scss (но это не точно)]
+const Header = ({ setOption, userInfo, logout, setItem }) =>{
     const onChangeHandler = (event) => {
         setItem(null);
         setOption(event.target.value);
@@ -48,11 +43,4 @@ const mapStateToProps = state => {
     }
 }
 
-
-// @tip_redux03
-// Тут всё элегантно: 
-// Имеется функция connect, которая принимает два метода и компонент
-// Методы - mapStateToProps - определяет, какие значения из состояния взять и передать в компонент в качестве пропсов
-// mapDispatchToProps - в нашем случае вообще объект. Определяет, какие варианты ебануть dispatch будут доступны в компоненте
-// теперь смотри в @tip_redux03_01
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

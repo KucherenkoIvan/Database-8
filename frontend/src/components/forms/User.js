@@ -35,7 +35,7 @@ const User = ({ userInfo, selectedItem }) =>{
             </div>
             <div className="block">
                 <label className="label" htmlFor="password">password</label>
-                <input onChange={changeHandler} className="input" type="password" name="password" disabled={!canWrite} />
+                <input onChange={changeHandler} className="input" type="password" name="password" value={inputValue.password} disabled={!canWrite || selectedItem} />
             </div>
             <div className="block">
                 <label className="label" htmlFor="accessLevel">accessLevel</label>

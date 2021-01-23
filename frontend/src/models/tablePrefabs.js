@@ -37,8 +37,8 @@ export const tablePrefabs = {
         name: 'CourierInfo',
         fields: [
             'id',
-            'BirthDate',
             'CourierID',
+            'BirthDate',
             'Address',
             'Phone',
         ],
@@ -88,8 +88,8 @@ export const tablePrefabs = {
         name: 'OrderDetails',
         fields: [
             'id',
-            'OrderID',
             'LineItem',
+            'OrderID',
             'ProductID',
             'Qty',
             'Price',
@@ -113,4 +113,12 @@ export const tablePrefabs = {
             write: accessLevels['user-control'],
         }
     },
+    Sql: {
+        name: 'Sql',
+        fields: ['result'],
+        requiredRights: {
+            read: accessLevels.absolute,
+            write: accessLevels.absolute,
+        }
+    }
 };
