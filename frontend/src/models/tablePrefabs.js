@@ -37,8 +37,8 @@ export const tablePrefabs = {
         name: 'CourierInfo',
         fields: [
             'id',
-            'CourierID',
             'BirthDate',
+            'CourierID',
             'Address',
             'Phone',
         ],
@@ -88,8 +88,8 @@ export const tablePrefabs = {
         name: 'OrderDetails',
         fields: [
             'id',
-            'LineItem',
             'OrderID',
+            'LineItem',
             'ProductID',
             'Qty',
             'Price',

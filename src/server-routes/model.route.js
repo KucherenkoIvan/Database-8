@@ -2,101 +2,14 @@ const { Router } = require('express');
 const sequelize = require('../sequelize');
 
 const models = {
-    CourierInfo: {
-        proc_names: {
-            insert: 'insert_courierInfo',
-            update: 'update_courierInfo',
-            delete: 'delete_courierInfo',
-        },
-        fields: [
-            'CourierID',
-            'BirthDate',
-            'Address',
-            'Phone',
-        ],
-    },
-    Courier: {
-        proc_names: {
-            insert: 'insert_courier',
-            update: 'update_courier',
-            delete: 'delete_courier',
-        },
-        fields: [
-            'FName',
-            'MName',
-            'LName',
-            'Salary',
-            'PriorSalary',
-        ]
-    },
-    Customer: {
-        proc_names: {
-            insert: 'insert_customer',
-            update: 'update_customer',
-            delete: 'delete_customer',
-        },
-        fields: [
-            'FName',
-            'MName',
-            'LName',
-            'Address',
-            'City',
-            'Phone',
-        ]
-    },
-    Product: {
-        proc_names: {
-            insert: 'insert_product',
-            update: 'update_product',
-            delete: 'delete_product',
-        },
-        fields: [
-            'Name',
-            'Description'
-        ]
-    },
-    Stocks: {
-        proc_names: {
-            insert: 'insert_stocks',
-            update: 'update_stocks',
-            delete: 'delete_stocks',
-        },
-        fields: [
-            'ProductID',
-            'Qty',
-        ]
-    },
-    Order: {
-        proc_names: {
-            insert: 'insert_order',
-            update: 'update_order',
-            delete: 'delete_order',
-        },
-        fields: [
-            'CustomerID',
-            'ClientID',
-            'OrderDate',
-        ]
-    },
-    OrderDetails: {
-        proc_names: {
-            insert: 'insert_orderDetails',
-            update: 'update_orderDetails',
-            delete: 'delete_orderDetails',
-        },
-        fields: [
-            'OrderID',
-            'LineItem',
-            'ProductID',
-            'Qty',
-            'Price',
-        ]
-    },
-    User: {
-        proc_names: {
-            delete: 'delete_user',
-        }
-    },
+    CourierInfo: require('../models/CourierInfo.model'),
+    Courier: require('../models/Courier.model'),
+    Customer: require('../models/Customer.model'),
+    Product: require('../models/Product.model'),
+    Stocks: require('../models/Stocks.model'),
+    Order: require('../models/Order.model'),
+    OrderDetails: require('../models/OrderDetails.model'),
+    User: require('../models/User.model'),
 };
 
 const router = Router();
@@ -112,7 +25,7 @@ router.get('/:modelName', async (req, res) => {
         })
     }
 
-    const data = (await sequelize.query(`select * from "${modelName}"`))[0];
+    const data = (await models[modelName].findAll());
 
     res.json(data);
 })
@@ -120,10 +33,10 @@ router.get('/:modelName', async (req, res) => {
 router.post('/delete/:modelName', async (req, res) => {
     const model = models[req.params.modelName];
     const {id, user} = req.body;
-    const query = `EXEC ${model.proc_names.delete} ${id}, '${user}'`;
+    const candidate = await model.findOne({where: {id}});
 
     try {
-        (await sequelize.query(query));
+        (await candidate.destroy());
         res.json({status: '200/OK'});
     } catch (e) {
         return res.status(500).json({
@@ -164,16 +77,10 @@ router.post('/:modelName', async (req, res) => {
     };
 
     try {
-        let query = `EXEC ${model.proc_names.insert} `;
-
-        model.fields.forEach((fieldName) => {
-            query += modelData[fieldName] ? `'${modelData[fieldName]}',` : 'null,';
-        });
-
-        query += `'${req.body.user}'`;
-
-        const data = await sequelize.query(query);
-        return res.json(data);
+        console.log(modelData)
+        let candidate = new model(modelData);
+        await candidate.save();
+        return res.json(candidate);
     } catch (e) {
         return res.status(500).json({
             error: {
@@ -186,16 +93,8 @@ router.post('/:modelName', async (req, res) => {
 router.patch('/:modelName', async (req, res) => {
     const {modelData} = req.body;
 
-    // проверить на работоспособность
-    if (req.modelName === 'User') {
-        req.body.login = modelData.login;
-        req.body.password = modelData.password;
-        req.body.accessLevel = modelData.accessLevel;
-
-        res.redirect('../auth/register');
-    }
-
     const model = models[req.params.modelName];
+    console.log(modelData)
 
     if (!model) {
         return res.status(500).json({
@@ -213,11 +112,19 @@ router.patch('/:modelName', async (req, res) => {
         })
     };
 
+
     try {
 
         Object.keys(modelData).forEach(key => modelData[key] === '' && (modelData[key] = null));
 
-        let query = `EXEC ${model.proc_names.update} ${modelData.id},`;
+        let candidate = await model.findOne({where: {id: modelData.id}});
+
+
+        Object.keys(modelData).forEach(key => candidate[key] = modelData[key]);
+
+        await candidate.save();
+
+        return res.json(candidate);
 
         model.fields.forEach((fieldName) => {
             query += modelData[fieldName] ? `'${modelData[fieldName]}',` : 'null,';
@@ -228,6 +135,7 @@ router.patch('/:modelName', async (req, res) => {
         const data = await sequelize.query(query);
         return res.json(data);
     } catch (e) {
+        console.warn('vvv')
         return res.status(500).json({
             error: {
                 msg: e.message

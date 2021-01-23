@@ -34,7 +34,7 @@ const Main = ({ selectedTable, data, setItem, userInfo, appendNotification }) =>
                     {data.model === selectedTable && data.model !== 'Sql' && 
                         data?.rows?.map?.(row => 
                             (<tr key={row.id} id={row.id} onClick={(event) => setItem(data.rows.find(rw => rw.id === Number(event.target.id)))}>{Object.keys(row).map(
-                                key => availableFields.includes(key) && (<td key={key} id={row.id}>{row[key] ? row[key] : JSON.stringify(row)}</td>)
+                                key => availableFields.includes(key) && (<td key={key} id={row.id}>{row[key]}</td>)
                             )}
                             </tr>)
                         )
